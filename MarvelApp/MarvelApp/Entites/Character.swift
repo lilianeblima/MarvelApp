@@ -7,6 +7,20 @@
 
 import UIKit
 
-class Character: NSObject {
-
+struct Character: Codable {
+    let name: String
+    private let imageObject: ImageObject
+    let id: Int
+    let description: String?
+    
+    var image: String {
+        return "\(imageObject.path).\(imageObject.extension)"
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case name, id, description
+        case imageObject = "thumbnail"
+    }
 }
+
+
