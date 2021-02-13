@@ -12,7 +12,7 @@ protocol ViewToPresenterListCharactersProtocol: class {
     var interactor: PresenterToInteractorListCharactersProtocol? { get set }
     var router: PresenterToRouterListCharactersProtocol? { get set }
     func getCharacters()
-    func getCharactersCount() -> Int
+    func getNumberOfItemsInSection() -> Int
     func getCharacter(index: Int) -> Character?
     
 }

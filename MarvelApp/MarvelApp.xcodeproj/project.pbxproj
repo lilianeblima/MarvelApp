@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1103B71325D8313A002C718A /* CharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1103B71225D8313A002C718A /* CharacterCell.swift */; };
+		1103B72E25D857D3002C718A /* CustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1103B72D25D857D3002C718A /* CustomFlowLayout.swift */; };
 		11FCA6D725D75B8800BDD6E2 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FCA6D625D75B8800BDD6E2 /* Character.swift */; };
 		11FCA70425D76B4400BDD6E2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FCA70325D76B4400BDD6E2 /* Result.swift */; };
 		11FCA70A25D76BBD00BDD6E2 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FCA70925D76BBD00BDD6E2 /* StringExtension.swift */; };
@@ -47,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1103B71225D8313A002C718A /* CharacterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCell.swift; sourceTree = "<group>"; };
+		1103B72D25D857D3002C718A /* CustomFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFlowLayout.swift; sourceTree = "<group>"; };
 		11532AE14AE6CEE1AE1CFF35 /* Pods_MarvelApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MarvelApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11FCA6D625D75B8800BDD6E2 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		11FCA70325D76B4400BDD6E2 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
@@ -103,6 +107,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1103B71125D8311A002C718A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				1103B71225D8313A002C718A /* CharacterCell.swift */,
+				1103B72D25D857D3002C718A /* CustomFlowLayout.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		11FCA6D525D75B3100BDD6E2 /* Entites */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +128,7 @@
 		11FCA70825D76B9400BDD6E2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				1103B71125D8311A002C718A /* Cell */,
 				11FCA70925D76BBD00BDD6E2 /* StringExtension.swift */,
 				11FCA73225D76F4A00BDD6E2 /* Endpoint.swift */,
 			);
@@ -411,7 +425,9 @@
 				11FF3AB425D7485200C4DBE5 /* ListCharacterPresenter.swift in Sources */,
 				11FCA74225D7817700BDD6E2 /* ListCharactersProtocol.swift in Sources */,
 				11FF3AAF25D7483100C4DBE5 /* ListCharactersViewController.swift in Sources */,
+				1103B71325D8313A002C718A /* CharacterCell.swift in Sources */,
 				11FCA6D725D75B8800BDD6E2 /* Character.swift in Sources */,
+				1103B72E25D857D3002C718A /* CustomFlowLayout.swift in Sources */,
 				11FF3A6125D737B900C4DBE5 /* ViewController.swift in Sources */,
 				11FCA73325D76F4A00BDD6E2 /* Endpoint.swift in Sources */,
 				11FF3A5D25D737B900C4DBE5 /* AppDelegate.swift in Sources */,

@@ -11,8 +11,11 @@ import Foundation
 class ListCharactersRouter: PresenterToRouterListCharactersProtocol {
     
     static func createModule() -> UIViewController {
-        let viewController = ListCharactersTableViewController()
-        let navigationController = UINavigationController(rootViewController: viewController)
+        //let viewController = ListCharactersViewController()
+        
+        let viewController = UIStoryboard(name: "ListCharacters", bundle: nil).instantiateViewController(identifier: "ListCharactersViewController") as ListCharactersViewController
+
+        
         let presenter: ViewToPresenterListCharactersProtocol & InteractorToPresenterListCharactersProtocol = ListCharacterPresenter()
         let interactor: PresenterToInteractorListCharactersProtocol = ListCharactersInteractor()
         let router: PresenterToRouterListCharactersProtocol = ListCharactersRouter()
@@ -22,10 +25,12 @@ class ListCharactersRouter: PresenterToRouterListCharactersProtocol {
         viewController.presenter?.view = viewController
         viewController.presenter?.interactor = ListCharactersInteractor()
         viewController.presenter?.interactor?.presenter = presenter
-//        presenter.view = viewController
-//        presenter.router = router
-//        presenter.interactor = interactor
-//        interactor.presenter = presenter
+        
+        let navigationController = UINavigationController(rootViewController: viewController)
+        presenter.view = viewController
+        presenter.router = router
+        presenter.interactor = interactor
+        interactor.presenter = presenter
         
         return viewController
     }

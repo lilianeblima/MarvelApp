@@ -17,6 +17,8 @@ struct Character: Codable {
         return "\(imageObject.path).\(imageObject.extension)"
     }
     
+    var isFavorite: Bool = false
+    
     enum CodingKeys: String, CodingKey {
         case name, id, description
         case imageObject = "thumbnail"

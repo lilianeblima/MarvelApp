@@ -8,13 +8,11 @@
 import Foundation
 
 class ListCharacterPresenter: ViewToPresenterListCharactersProtocol {
+    weak var view: PresenterToViewListCharactersProtocol?
+    var interactor: PresenterToInteractorListCharactersProtocol?
     var router: PresenterToRouterListCharactersProtocol?
     
-    
-    var view: PresenterToViewListCharactersProtocol?
-    var interactor: PresenterToInteractorListCharactersProtocol?
-    
-    func getCharactersCount() -> Int {
+    func getNumberOfItemsInSection() -> Int {
         return interactor?.characters?.count ?? 0
     }
     
