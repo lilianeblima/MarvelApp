@@ -8,7 +8,31 @@
 import UIKit
 import Alamofire
 
-class ListCharactersInteractor {
+class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
+    var presenter: InteractorToPresenterListCharactersProtocol?
+    var characters: [Character]?
+    
+    func getCharacters() {
+        guard let url = RequestEndpoint.characters.url else {
+            //TO DO: tratamento de erro
+            return
+        }
+        Alamofire.request(url).response { response in
+            if let data = response.data {
+                do {
+                    let decoder = try JSONDecoder().decode(Result.self, from: data)
+                    self.characters = decoder.data.results
+                    self.presenter?.getCharactersSuccess(characters: decoder.data.results)
+                } catch let error {
+                    // Tratamento de erro
+                    self.presenter?.getCharactersFail(errorMessage: "Errouu - Detalhes: \(error)")
+                }
+            } else {
+                // Tratamento de erro
+            }
+        }
+    }
+    
 
     func getCharacters(completion: @escaping (_ characters: [Character]?, _ errorMessage: String?) -> Void) {
         guard let url = RequestEndpoint.characters.url else {
