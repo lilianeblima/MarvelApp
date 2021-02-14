@@ -15,6 +15,7 @@ protocol ViewToPresenterListCharactersProtocol: class {
     func getNumberOfItemsInSection() -> Int
     func getSelectedCharacter(index: Int) -> Character?
     func isNeedUpdateCharacters()
+    func getCustomLayout() -> (title: String, customLayout: CustomLayout)?
 }
 
 protocol PresenterToViewListCharactersProtocol: class {
@@ -29,6 +30,7 @@ protocol PresenterToInteractorListCharactersProtocol: class {
     func getCharacters()
     func isNeedUpdateCharacters()
     func updateCharacters()
+    func getCustomLayout() -> (title: String, customLayout: CustomLayout)
     var result: Result? { get }
 }
 

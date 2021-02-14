@@ -8,11 +8,11 @@
 import Foundation
 
 class ListCharacterPresenter: ViewToPresenterListCharactersProtocol {
-    
+
     weak var view: PresenterToViewListCharactersProtocol?
     var interactor: PresenterToInteractorListCharactersProtocol?
     var router: PresenterToRouterListCharactersProtocol?
-    
+        
     func getInitialCharacters() {
         interactor?.getCharacters()
     }
@@ -31,6 +31,10 @@ class ListCharacterPresenter: ViewToPresenterListCharactersProtocol {
     
     func getNextCharacters() {
         interactor?.updateCharacters()
+    }
+    
+    func getCustomLayout() -> (title: String, customLayout: CustomLayout)? {
+        return interactor?.getCustomLayout()
     }
 }
 

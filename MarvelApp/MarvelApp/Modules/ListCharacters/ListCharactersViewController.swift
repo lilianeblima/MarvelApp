@@ -9,27 +9,16 @@ import UIKit
 
 class ListCharactersViewController: UIViewController {
     
-    @IBOutlet weak var rightButtonItem: UIBarButtonItem!
-    var currentLayoutCollection: CustomLayout = .grid
-    @IBAction func changeListStyleAction(_ sender: UIBarButtonItem) {
-
-        var customLayout = CustomLayout.grid
-        var buttonTitle = "Lista"
-        if currentLayoutCollection == .grid {
-            customLayout = CustomLayout.list
-            buttonTitle = "Grid"
-        }
-        
-        rightButtonItem.title = buttonTitle
-        currentLayoutCollection = customLayout
-        UIView.animate(withDuration: 0.2) { () -> Void in
-            self.collectionView.collectionViewLayout.invalidateLayout()
-            self.collectionView.setCollectionViewLayout(CustomFlowLayout(custom: customLayout), animated: true)
-        }
-    }
-    @IBOutlet weak var collectionView: UICollectionView!
     var presenter: ViewToPresenterListCharactersProtocol?
-
+    
+    @IBOutlet weak var rightButtonItem: UIBarButtonItem!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
+        return refreshControl
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,16 +26,19 @@ class ListCharactersViewController: UIViewController {
         collectionView.addSubview(refreshControl)
         self.presenter?.getInitialCharacters()
     }
-
-    lazy var refreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
-        return refreshControl
-    }()
     
     @objc func refreshAction() {
         presenter?.isNeedUpdateCharacters()
-
+    }
+    
+    @IBAction func changeListStyleAction(_ sender: UIBarButtonItem) {        
+        guard let customLayout = presenter?.getCustomLayout() else { return }
+        
+        rightButtonItem.title = customLayout.title
+        UIView.animate(withDuration: 0.2) { () -> Void in
+            self.collectionView.collectionViewLayout.invalidateLayout()
+            self.collectionView.setCollectionViewLayout(CustomFlowLayout(custom: customLayout.customLayout), animated: true)
+        }
     }
 }
 

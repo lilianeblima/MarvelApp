@@ -13,7 +13,8 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
     var presenter: InteractorToPresenterListCharactersProtocol?
     var result: Result?
     private var wating: Bool = false
-    
+    var currentLayoutCollection: CustomLayout = .grid
+
     func getCharacters() {
         guard let url = RequestEndpoint.characters(customQuery: nil).url else {
             //TO DO: tratamento de erro
@@ -75,6 +76,16 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
         return ["offset": "\(result?.data.allCharacters.count ?? 0)"]
     }
     
+    func getCustomLayout() -> (title: String, customLayout: CustomLayout) {
+        var customLayout = CustomLayout.grid
+        var buttonTitle = "Lista"
+        if currentLayoutCollection == .grid {
+            customLayout = CustomLayout.list
+            buttonTitle = "Grid"
+        }
+        currentLayoutCollection = customLayout
+        return(buttonTitle, customLayout)
+    }
     
     // TODO: Remover
     func getCharacters(completion: @escaping (_ characters: [Character]?, _ errorMessage: String?) -> Void) {
