@@ -143,6 +143,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		1133238F25D9DD3500783BDE /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				1103B76125D98502002C718A /* Favorite.storyboard */,
+				11FF3AA625D7437400C4DBE5 /* ListCharacters.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		113B237925D9CDD8000BE587 /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +176,7 @@
 		11FCA70825D76B9400BDD6E2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				1133238F25D9DD3500783BDE /* Storyboards */,
 				11FCA6D525D75B3100BDD6E2 /* Entites */,
 				1103B71125D8311A002C718A /* Cell */,
 				11FCA70925D76BBD00BDD6E2 /* StringExtension.swift */,
@@ -244,7 +254,6 @@
 		11FF3A9825D73E3A00C4DBE5 /* ListCharacters */ = {
 			isa = PBXGroup;
 			children = (
-				11FF3AA625D7437400C4DBE5 /* ListCharacters.storyboard */,
 				11FF3AAE25D7483100C4DBE5 /* ListCharactersViewController.swift */,
 				11FF3AB325D7485200C4DBE5 /* ListCharacterPresenter.swift */,
 				11FF3AB825D7487500C4DBE5 /* ListCharactersInteractor.swift */,
@@ -264,12 +273,11 @@
 		11FF3A9A25D73E7F00C4DBE5 /* Favorite */ = {
 			isa = PBXGroup;
 			children = (
-				1103B76125D98502002C718A /* Favorite.storyboard */,
+				113B235F25D9AEAE000BE587 /* FavoriteProtocol.swift */,
 				1103B76625D999EA002C718A /* FavoriteViewController.swift */,
 				1103B76B25D99A07002C718A /* FavoritePresenter.swift */,
 				1103B77025D99A14002C718A /* FavoriteInteractor.swift */,
 				1103B77525D99A20002C718A /* FavoriteRouter.swift */,
-				113B235F25D9AEAE000BE587 /* FavoriteProtocol.swift */,
 			);
 			path = Favorite;
 			sourceTree = "<group>";
