@@ -16,6 +16,8 @@ protocol ViewToPresenterFavoriteProtocol: class {
     func collectionCellType() -> UICollectionViewCell.Type
     func getCustomLayout() -> UICollectionViewFlowLayout
     func getSelectedFavoriteCharacter(index: Int) -> FavoriteCharacter?
+    func refresh()
+    func removeFavoriteIten(favorite: FavoriteCharacter?)
 }
 
 protocol PresenterToInteracatorFavoriteProtocol: class {
@@ -24,14 +26,18 @@ protocol PresenterToInteracatorFavoriteProtocol: class {
     func collectionCellType() -> UICollectionViewCell.Type
     func getCustomLayout() -> UICollectionViewFlowLayout
     var favoritesCharacters: [FavoriteCharacter] { get }
+    func refresh()
+    func removeFavoriteIten(favorite: FavoriteCharacter?)
 }
 
 protocol InteractorToPresenterFavoriteProtocol: class {
-
+    func refreshData()
+    func showAlert(withTitle: String, andMessage: String)
 }
 
 protocol PresenterToViewFavoriteProtocol: class {
-    
+    func refresh()
+    func showAlert(withTitle: String, andMessage: String)
 }
 
 protocol PresenterToRouterFavoriteProtocol: class {

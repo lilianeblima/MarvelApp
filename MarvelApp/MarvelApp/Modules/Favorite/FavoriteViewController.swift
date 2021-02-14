@@ -10,14 +10,20 @@ import UIKit
 class FavoriteViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    
     var presenter: ViewToPresenterFavoriteProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.register(AlertCell.self)
         collectionView.register(CharacterCell.self)
-        collectionView.collectionViewLayout = presenter?.getCustomLayout() ?? CustomFlowLayout(custom: .grid)
         self.navigationController?.navigationBar.topItem?.title = Titles.favorite
+        collectionView.collectionViewLayout = presenter?.getCustomLayout() ?? CustomFlowLayout(custom: .grid)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter?.refresh()
     }
 }
 
@@ -31,6 +37,7 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
             cell.configure()
             return cell
         } else if  let type = presenter?.collectionCellType, type() == CharacterCell.self, let cell: CharacterCell = collectionView.dequeueReusableCell(for: indexPath), let favoriteCharacter = presenter?.getSelectedFavoriteCharacter(index: indexPath.row) {
+            cell.delegate = self
             cell.configure(withFavoriteCharacter: favoriteCharacter)
             return cell
             
@@ -38,11 +45,25 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
             return UICollectionViewCell()
         }
     }
-    
-    
-    
 }
 
 extension FavoriteViewController: PresenterToViewFavoriteProtocol {
+    func showAlert(withTitle: String, andMessage: String) {
+        let alert = UIAlertController(title: withTitle, message: andMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: AlertMessage.ok, style: .default))
+        self.present(alert, animated: true)
+    }
+    
+    func refresh() {
+        collectionView.collectionViewLayout = presenter?.getCustomLayout() ?? CustomFlowLayout(custom: .grid)
+        collectionView.reloadData()
+    }
+}
+
+extension FavoriteViewController: FavoriteActionProtocol {
+    func buttonTapped(isFavorite: Bool, character: FavoriteCharacter?) {
+        presenter?.removeFavoriteIten(favorite: character)
+    }
+    
     
 }

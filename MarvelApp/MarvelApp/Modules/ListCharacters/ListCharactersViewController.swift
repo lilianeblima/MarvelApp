@@ -84,7 +84,7 @@ extension ListCharactersViewController: PresenterToViewListCharactersProtocol {
 }
 
 extension ListCharactersViewController: FavoriteActionProtocol {
-    func buttonTapped(isFavorite: Bool, character: Character) {
+    func buttonTapped(isFavorite: Bool, character: FavoriteCharacter?) {
         presenter?.updateFavoriteCharacter(isFavorite: isFavorite, character: character)
     }
     

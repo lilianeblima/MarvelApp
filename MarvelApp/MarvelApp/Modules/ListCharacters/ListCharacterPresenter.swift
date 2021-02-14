@@ -37,7 +37,7 @@ class ListCharacterPresenter: ViewToPresenterListCharactersProtocol {
         return interactor?.getCustomLayout()
     }
     
-    func updateFavoriteCharacter(isFavorite: Bool, character: Character) {
+    func updateFavoriteCharacter(isFavorite: Bool, character: FavoriteCharacter?) {
         interactor?.updateFavoriteCharacter(isFavorite: isFavorite, character: character)
     }
 }

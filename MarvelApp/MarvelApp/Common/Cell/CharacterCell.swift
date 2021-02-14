@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 
 protocol FavoriteActionProtocol: class {
-    func buttonTapped(isFavorite: Bool, character: Character)
+    func buttonTapped(isFavorite: Bool, character: FavoriteCharacter?)
 }
 
 class CharacterCell: UICollectionViewCell, NibReusable {
@@ -20,7 +20,8 @@ class CharacterCell: UICollectionViewCell, NibReusable {
     @IBOutlet weak var nameLabel: UILabel!
     
     weak var delegate: FavoriteActionProtocol?
-    var currentCharacter: Character?
+    private var currentCharacter: Character?
+    private var currentFavoriteCharacter: FavoriteCharacter?
     
     override class func awakeFromNib() {
         super.awakeFromNib()
@@ -32,24 +33,33 @@ class CharacterCell: UICollectionViewCell, NibReusable {
     }
     
     func configure(withFavoriteCharacter character: FavoriteCharacter) {
-        configureCell(name: character.name, isFavorite: true, imageString: "", image: nil)
+        currentFavoriteCharacter = character
+        let image = UIImage(data: character.image as Data? ?? Data())
+        configureCell(name: character.name, isFavorite: true, imageString: String(), image: image)
     }
     
     private func configureCell(name: String, isFavorite: Bool, imageString: String, image: UIImage?) {
         nameLabel.text = name
-        let imageName = isFavorite ? "Favorite" : "NoFavorite"
+        let imageName = isFavorite ? ImageNames.favoriteIcon : ImageNames.noFavoriteIcon
         favoriteImage.image = UIImage(named: imageName)
         if let image = image {
             imageCharacter.image = image
         } else if let url = URL(string: imageString) {
-            imageCharacter.kf.setImage(with: url)
+            imageCharacter.kf.setImage(with: url, completionHandler:  { image, _, _, _ in
+                if let image = image {
+                    self.currentCharacter?.image = image
+                }
+            })
+
         }
         
     }
     
     @IBAction func favoriteAction(_ sender: UIButton) {
         if let currentCharacter = currentCharacter {
-            delegate?.buttonTapped(isFavorite: !currentCharacter.isFavorite, character: currentCharacter)
+            delegate?.buttonTapped(isFavorite: !currentCharacter.isFavorite, character: currentCharacter.convertToFavorite())
+        } else if let currentFavoriteCharacter = currentFavoriteCharacter {
+            delegate?.buttonTapped(isFavorite: false, character: currentFavoriteCharacter)
         }
     }
 

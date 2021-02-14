@@ -31,8 +31,22 @@ class FavoritePresenter: ViewToPresenterFavoriteProtocol {
         return interactor?.favoritesCharacters[index]
     }
     
+    func refresh() {
+        interactor?.refresh()
+    }
+    
+    func removeFavoriteIten(favorite: FavoriteCharacter?) {
+        interactor?.removeFavoriteIten(favorite: favorite)
+    }
 }
 
 extension FavoritePresenter: InteractorToPresenterFavoriteProtocol {
+    func showAlert(withTitle: String, andMessage: String) {
+        view?.showAlert(withTitle: withTitle, andMessage: andMessage)
+    }
+    
+    func refreshData() {
+        view?.refresh()
+    }
     
 }

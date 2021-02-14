@@ -22,7 +22,7 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
             //TO DO: tratamento de erro
             return
         }
-        favorites = database.getAllElements() ?? []
+        favorites = database.getAllElements()
         Alamofire.request(url).response { response in
             if let data = response.data {
                 do {
@@ -102,9 +102,9 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
     }
     
     // MARK: - FAvorite Action
-    func updateFavoriteCharacter(isFavorite: Bool, character: Character) {
-        selectedActionFavorite(withCharacter: character, isFavorite: isFavorite) { success, _  in
-            if success, let index = self.result?.data.allCharacters.firstIndex(where: { $0.id == character.id }) {
+    func updateFavoriteCharacter(isFavorite: Bool, character: FavoriteCharacter?) {
+        selectedActionFavorite(withCharacter: character, isFavorite: isFavorite) { success, errorMessage  in
+            if success, let index = self.result?.data.allCharacters.firstIndex(where: { $0.id == character?.id }) {
                 self.result?.data.allCharacters[index].isFavorite = isFavorite
                 // Ou atualizar só a celula?
                 self.presenter?.successResponse()
@@ -114,10 +114,10 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
         }
     }
     
-    func selectedActionFavorite(withCharacter: Character, isFavorite: Bool, completion: CompletionHandler) {
+    func selectedActionFavorite(withCharacter: FavoriteCharacter?, isFavorite: Bool, completion: CompletionHandler) {
         if !isFavorite {
-            removeCharacterFavorite(withCharacter: withCharacter, completion: completion)
-        } else if isFavorite, let favoriteCharacter = withCharacter.convertToFavorite() {
+            removeCharacterFavorite(withId: withCharacter?.id ?? 0, completion: completion)
+        } else if isFavorite, let favoriteCharacter = withCharacter {
             saveNewCharacterFavorite(withCharacter: favoriteCharacter, completion: completion)
         } else {
             completion(false, "Erro ao converter objeto")
@@ -128,7 +128,7 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
         database.save(favoriteCharacter: withCharacter, completion: completion)
     }
     
-    func removeCharacterFavorite(withCharacter: Character, completion: CompletionHandler) {
-        database.remove(favoriteId: withCharacter.id, completion: completion)
+    func removeCharacterFavorite(withId id: Int, completion: CompletionHandler) {
+        database.remove(favoriteId: id, completion: completion)
     }
 }

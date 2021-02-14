@@ -26,13 +26,14 @@ struct Character: Codable {
     }
     
     func convertToFavorite() -> FavoriteCharacter? {
-//        guard let image = image, let jpegImage = image.jpegData(compressionQuality: 0.9) else {
-//            return nil
-//        }
-//        let imageData = NSData(data: jpegImage)
-        var favoriteCharacter = FavoriteCharacter()
+        guard let image = image, let jpegImage = image.jpegData(compressionQuality: 0.9) else {
+            return nil
+        }
+        let imageData = NSData(data: jpegImage)
+        let favoriteCharacter = FavoriteCharacter()
         favoriteCharacter.name = name
         favoriteCharacter.id = id
+        favoriteCharacter.image = imageData
         return favoriteCharacter
     }
 }

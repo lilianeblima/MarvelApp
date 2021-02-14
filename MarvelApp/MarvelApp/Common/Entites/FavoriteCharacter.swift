@@ -10,6 +10,6 @@ import RealmSwift
 
 class FavoriteCharacter: Object {
     @objc dynamic var name = String()
-//    @objc dynamic var image: NSData? = nil
+    @objc dynamic var image: NSData? = nil
     @objc dynamic var id = 0
 }

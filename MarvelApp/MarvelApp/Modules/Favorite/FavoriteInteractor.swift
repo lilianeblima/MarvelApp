@@ -8,6 +8,7 @@
 import UIKit
 
 class FavoriteInteractor: PresenterToInteracatorFavoriteProtocol {
+    
     var presenter: InteractorToPresenterFavoriteProtocol?
     
     var favoritesCharacters: [FavoriteCharacter] {
@@ -28,7 +29,18 @@ class FavoriteInteractor: PresenterToInteracatorFavoriteProtocol {
         return database.getAllElements().isEmpty ? AlertCell.self : CharacterCell.self
     }
     
-    func loadFavorites() {
-        
+    func refresh() {
+        presenter?.refreshData()
+    }
+    
+    func removeFavoriteIten(favorite: FavoriteCharacter?) {
+        database.remove(favoriteId: favorite?.id ?? 0) { success, _ in
+            if success {
+                presenter?.refreshData()
+            } else {
+                presenter?.showAlert(withTitle: AlertMessage.title, andMessage: AlertMessage.defaultMessage)
+            }
+            
+        }
     }
 }
