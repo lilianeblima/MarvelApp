@@ -11,27 +11,31 @@ protocol ViewToPresenterListCharactersProtocol: class {
     var view: PresenterToViewListCharactersProtocol? { get set }
     var interactor: PresenterToInteractorListCharactersProtocol? { get set }
     var router: PresenterToRouterListCharactersProtocol? { get set }
-    func getCharacters()
+    func getInitialCharacters()
     func getNumberOfItemsInSection() -> Int
-    func getCharacter(index: Int) -> Character?
-    
+    func getSelectedCharacter(index: Int) -> Character?
+    func isNeedUpdateCharacters()
 }
 
 protocol PresenterToViewListCharactersProtocol: class {
-    func getCharactersSuccess()
+    func updateCollectionView()
     func getCharactersFail(errorMessage: String)
+    func showLoadViewCell()
 }
 
 
 protocol PresenterToInteractorListCharactersProtocol: class {
     var presenter: InteractorToPresenterListCharactersProtocol? { get set }
     func getCharacters()
-    var characters: [Character]? {get}
+    func isNeedUpdateCharacters()
+    func updateCharacters()
+    var result: Result? { get }
 }
 
 protocol InteractorToPresenterListCharactersProtocol: class {
-    func getCharactersSuccess(characters: [Character])
+    func getCharactersSuccess()
     func getCharactersFail(errorMessage: String)
+    func needUpdateCharacters()
 }
 
 protocol PresenterToRouterListCharactersProtocol: class {

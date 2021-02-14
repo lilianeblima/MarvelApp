@@ -9,11 +9,26 @@ import UIKit
 
 struct Result: Codable {
     let code: Int
-    let data: DataObject
+    var data: DataObject
+    
+    var existNextPagination: Bool {
+        return data.allCharacters.count < data.total ? true : false
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case code, data
+    }
 }
 
 struct DataObject: Codable {
-    let results: [Character]
+    var allCharacters: [Character]
+    let total: Int
+    var newCharacters: [Character] = []
+    
+    enum CodingKeys: String, CodingKey {
+        case total
+        case allCharacters = "results"
+    }
 }
 
 struct ImageObject: Codable {

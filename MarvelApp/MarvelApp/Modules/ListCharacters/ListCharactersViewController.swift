@@ -29,73 +29,64 @@ class ListCharactersViewController: UIViewController {
     }
     @IBOutlet weak var collectionView: UICollectionView!
     var presenter: ViewToPresenterListCharactersProtocol?
-    
-    let Array = ["River Cruise", "North Island", "Mountain trail", "Southern Coast", "Fishing Place", "Green Themeland", "Sunset Park"]
-    
-    var arr: [Character] = []
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let te = ListCharactersInteractor()
-        te.getCharacters { (charac, testo) in
-            if let charac = charac {
-                self.arr = charac
-                self.collectionView.reloadData()
-            }
-        }
-       // presenter?.getCharacters()
         collectionView.collectionViewLayout = CustomFlowLayout(custom: .grid)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-
-        
-        // Do any additional setup after loading the view.
+        collectionView.addSubview(refreshControl)
+        self.presenter?.getInitialCharacters()
     }
+
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
+        return refreshControl
+    }()
     
+    @objc func refreshAction() {
+        presenter?.isNeedUpdateCharacters()
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
-    */
-
 }
 
-extension ListCharactersViewController: UICollectionViewDelegate, UICollectionViewDataSource, PresenterToViewListCharactersProtocol {
+extension ListCharactersViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return arr.count
+        return presenter?.getNumberOfItemsInSection() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as? CharacterCell else { //
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as? CharacterCell, let character = presenter?.getSelectedCharacter(index: indexPath.row) else {
             return UICollectionViewCell()
         }
-        let character = arr[indexPath.row]
         cell.configure(character: character)
         return cell
     }
     
-    func getCharactersSuccess() {
-        
-        DispatchQueue.main.async {
-//            self.collectionView.reloadData()
-//            self.collectionView.reloadData()
-//            self.collectionView.reloadData()
-            self.collectionView.collectionViewLayout.invalidateLayout()
-//            self.collectionView.reloadData()
-            self.collectionView.layoutSubviews()
-            self.collectionView.reloadData()
-//            self.collectionView.updateConstraints()
-//            self.collectionView.updateConstraintsIfNeeded()
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height
+        if endScrolling >= (scrollView.contentSize.height) {
+            presenter?.isNeedUpdateCharacters()
         }
+    }
+}
+
+extension ListCharactersViewController: PresenterToViewListCharactersProtocol {
+    func updateCollectionView() {
+        self.collectionView.reloadData()
+        collectionView.refreshControl?.endRefreshing()
+        refreshControl.endRefreshing()
+        
     }
     
     func getCharactersFail(errorMessage: String) {
         print(errorMessage)
     }
+    
+    func showLoadViewCell() {
+        // TODO: Mostrar footer de loading
+    }
+    
+    
 }

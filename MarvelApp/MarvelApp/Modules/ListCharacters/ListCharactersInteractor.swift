@@ -9,11 +9,13 @@ import UIKit
 import Alamofire
 
 class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
+    
     var presenter: InteractorToPresenterListCharactersProtocol?
-    var characters: [Character]?
+    var result: Result?
+    private var wating: Bool = false
     
     func getCharacters() {
-        guard let url = RequestEndpoint.characters.url else {
+        guard let url = RequestEndpoint.characters(customQuery: nil).url else {
             //TO DO: tratamento de erro
             return
         }
@@ -21,8 +23,8 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
             if let data = response.data {
                 do {
                     let decoder = try JSONDecoder().decode(Result.self, from: data)
-                    self.characters = decoder.data.results
-                    self.presenter?.getCharactersSuccess(characters: decoder.data.results)
+                    self.result = decoder
+                    self.presenter?.getCharactersSuccess()
                 } catch let error {
                     // Tratamento de erro
                     self.presenter?.getCharactersFail(errorMessage: "Errouu - Detalhes: \(error)")
@@ -32,10 +34,51 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
             }
         }
     }
-    
 
+    func updateCharacters() {
+        guard let url = RequestEndpoint.characters(customQuery: getQuery()).url, !wating else {
+            return
+        }
+        wating = true
+        Alamofire.request(url).response { response in
+            self.wating = false
+            if let data = response.data {
+                do {
+                    let decoder = try JSONDecoder().decode(Result.self, from: data)
+                    self.updateResult(newCharacters: decoder.data.allCharacters)
+                    self.presenter?.getCharactersSuccess()
+                } catch let error {
+                    // Tratamento de erro
+                    self.presenter?.getCharactersFail(errorMessage: "Errouu - Detalhes: \(error)")
+                }
+            } else {
+                
+            }
+        }
+    }
+    
+    func isNeedUpdateCharacters() {
+        if let needUpdate = result?.existNextPagination, needUpdate {
+            presenter?.needUpdateCharacters()
+            updateCharacters()
+        }
+    }
+    
+    func updateResult(newCharacters: [Character]) {
+        result?.data.newCharacters = newCharacters
+        for character in newCharacters {
+            result?.data.allCharacters.append(character)
+        }
+    }
+    
+    func getQuery() -> [String: String] {
+        return ["offset": "\(result?.data.allCharacters.count ?? 0)"]
+    }
+    
+    
+    // TODO: Remover
     func getCharacters(completion: @escaping (_ characters: [Character]?, _ errorMessage: String?) -> Void) {
-        guard let url = RequestEndpoint.characters.url else {
+        guard let url = RequestEndpoint.characters(customQuery: nil).url else {
             //TO DO: tratamento de erro
             return
         }
@@ -43,7 +86,7 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
             if let data = response.data {
                 do {
                     let decoder = try JSONDecoder().decode(Result.self, from: data)
-                    completion(decoder.data.results, nil)
+                    completion(decoder.data.allCharacters, nil)
                 } catch let error {
                     // Tratamento de erro
                     print(error)
@@ -53,78 +96,4 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
             }
         }
     }
-    
-
 }
-
-
-
- /*
-fileprivate struct MarvelAPIConfig {
-    fileprivate static let keys = MarvelKeys()
-    static let privatekey = keys.marvelPrivateKey()!
-    static let apikey = keys.marvelApiKey()!
-    static let ts = Date().timeIntervalSince1970.description
-    static let hash = "\(ts)\(privatekey)\(apikey)".md5()
-}
- 
-enum MarvelAPI {
-    case characters(String?)
-    case character(String)
-}
- 
-extension MarvelAPI: TargetType {
-    var baseURL: URL { return URL(string: "https://gateway.marvel.com:443")! }
-    
-    
-    var path: String {
-        switch self {
-        case .characters:
-            return "/v1/public/characters"
-        case .character(let characterId):
-            return "/v1/public/characters/\(characterId)"
-        }
-    }
-    
-    var method: Moya.Method {
-        switch self {
-        case .characters, .character:
-            return .get
-        }
-    }
-    
-    func authParameters() -> [String: String] {
-        return ["apikey": MarvelAPIConfig.apikey,
-                "ts": MarvelAPIConfig.ts,
-                "hash": MarvelAPIConfig.hash]
-    }
-    
-    var parameters: [String: Any]? {
-        
-        switch self {
-        
-        case .characters(let query):
-            if let query = query {
-                return $.merge(authParameters(),
-                               ["nameStartsWith": query])
-            }
-            return authParameters()
-            
-        case .character(let characterId):
-            return $.merge(authParameters(),
-                           ["characterId": characterId])
-        }
-    }
-    
-    var task: Task {
-        return .request
-    }
-    
-    var sampleData: Data {
-        switch self {
-        default:
-            return Data()
-        }
-    }
-}
-*/

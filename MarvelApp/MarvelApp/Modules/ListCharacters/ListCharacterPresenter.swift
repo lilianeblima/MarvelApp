@@ -8,28 +8,39 @@
 import Foundation
 
 class ListCharacterPresenter: ViewToPresenterListCharactersProtocol {
+    
     weak var view: PresenterToViewListCharactersProtocol?
     var interactor: PresenterToInteractorListCharactersProtocol?
     var router: PresenterToRouterListCharactersProtocol?
     
-    func getNumberOfItemsInSection() -> Int {
-        return interactor?.characters?.count ?? 0
-    }
-    
-    func getCharacter(index: Int) -> Character? {
-        return interactor?.characters?[index]
-    }
-    
-
-    func getCharacters() {
+    func getInitialCharacters() {
         interactor?.getCharacters()
+    }
+    
+    func getNumberOfItemsInSection() -> Int {
+        return interactor?.result?.data.allCharacters.count ?? 0
+    }
+    
+    func getSelectedCharacter(index: Int) -> Character? {
+        return interactor?.result?.data.allCharacters[index]
+    }
+        
+    func isNeedUpdateCharacters() {
+        interactor?.isNeedUpdateCharacters()
+    }
+    
+    func getNextCharacters() {
+        interactor?.updateCharacters()
     }
 }
 
 extension ListCharacterPresenter: InteractorToPresenterListCharactersProtocol {
-    func getCharactersSuccess(characters: [Character]) {
-        //self.characters = characters
-        view?.getCharactersSuccess()
+    func needUpdateCharacters() {
+        view?.showLoadViewCell()
+    }
+    
+    func getCharactersSuccess() {
+        view?.updateCollectionView()
     }
     
     func getCharactersFail(errorMessage: String) {
