@@ -53,6 +53,7 @@ extension ListCharactersViewController: UICollectionViewDelegate, UICollectionVi
             return UICollectionViewCell()
         }
         cell.configure(character: character)
+        cell.delegate = self
         return cell
     }
     
@@ -78,6 +79,12 @@ extension ListCharactersViewController: PresenterToViewListCharactersProtocol {
     
     func showLoadViewCell() {
         // TODO: Mostrar footer de loading
+    }
+}
+
+extension ListCharactersViewController: FavoriteActionProtocol {
+    func buttonTapped(isFavorite: Bool, character: Character) {
+        presenter?.updateFavoriteCharacter(isFavorite: isFavorite, character: character)
     }
     
     

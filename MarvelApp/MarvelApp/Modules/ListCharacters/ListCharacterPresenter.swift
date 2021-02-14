@@ -36,6 +36,10 @@ class ListCharacterPresenter: ViewToPresenterListCharactersProtocol {
     func getCustomLayout() -> (title: String, customLayout: CustomLayout)? {
         return interactor?.getCustomLayout()
     }
+    
+    func updateFavoriteCharacter(isFavorite: Bool, character: Character) {
+        interactor?.updateFavoriteCharacter(isFavorite: isFavorite, character: character)
+    }
 }
 
 extension ListCharacterPresenter: InteractorToPresenterListCharactersProtocol {
@@ -43,7 +47,7 @@ extension ListCharacterPresenter: InteractorToPresenterListCharactersProtocol {
         view?.showLoadViewCell()
     }
     
-    func getCharactersSuccess() {
+    func successResponse() {
         view?.updateCollectionView()
     }
     

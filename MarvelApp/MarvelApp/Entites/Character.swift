@@ -12,8 +12,9 @@ struct Character: Codable {
     private let imageObject: ImageObject
     let id: Int
     let description: String?
+    var image: UIImage?
     
-    var image: String {
+    var imagePath: String {
         return "\(imageObject.path).\(imageObject.extension)"
     }
     
@@ -22,6 +23,17 @@ struct Character: Codable {
     enum CodingKeys: String, CodingKey {
         case name, id, description
         case imageObject = "thumbnail"
+    }
+    
+    func convertToFavorite() -> FavoriteCharacter? {
+//        guard let image = image, let jpegImage = image.jpegData(compressionQuality: 0.9) else {
+//            return nil
+//        }
+//        let imageData = NSData(data: jpegImage)
+        var favoriteCharacter = FavoriteCharacter()
+        favoriteCharacter.name = name
+        favoriteCharacter.id = id
+        return favoriteCharacter
     }
 }
 

@@ -8,6 +8,7 @@ target 'MarvelApp' do
   # Pods for MarvelApp
   pod 'Alamofire'
   pod 'Kingfisher'
-
+  pod 'Realm'
+  pod 'RealmSwift'
 
 end

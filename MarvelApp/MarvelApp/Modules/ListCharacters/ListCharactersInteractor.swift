@@ -9,7 +9,6 @@ import UIKit
 import Alamofire
 
 class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
-    
     var presenter: InteractorToPresenterListCharactersProtocol?
     var result: Result?
     private var wating: Bool = false
@@ -25,7 +24,7 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
                 do {
                     let decoder = try JSONDecoder().decode(Result.self, from: data)
                     self.result = decoder
-                    self.presenter?.getCharactersSuccess()
+                    self.presenter?.successResponse()
                 } catch let error {
                     // Tratamento de erro
                     self.presenter?.getCharactersFail(errorMessage: "Errouu - Detalhes: \(error)")
@@ -47,7 +46,7 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
                 do {
                     let decoder = try JSONDecoder().decode(Result.self, from: data)
                     self.updateResult(newCharacters: decoder.data.allCharacters)
-                    self.presenter?.getCharactersSuccess()
+                    self.presenter?.successResponse()
                 } catch let error {
                     // Tratamento de erro
                     self.presenter?.getCharactersFail(errorMessage: "Errouu - Detalhes: \(error)")
@@ -85,6 +84,21 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
         }
         currentLayoutCollection = customLayout
         return(buttonTitle, customLayout)
+    }
+    
+    func updateFavoriteCharacter(isFavorite: Bool, character: Character) {
+        guard let favoriteCharacter = character.convertToFavorite() else {
+            //Tratativa erro
+            return
+        }
+        let database = Database()
+        database.save(favoriteCharacter: favoriteCharacter) { success in
+            //Trataiva
+            if success, let index = self.result?.data.allCharacters.firstIndex(where: { $0.id == character.id }) {
+                self.result?.data.allCharacters[index].isFavorite = true
+            }
+            self.presenter?.successResponse()
+        }
     }
     
     // TODO: Remover

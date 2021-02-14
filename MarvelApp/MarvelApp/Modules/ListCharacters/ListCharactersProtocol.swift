@@ -16,6 +16,7 @@ protocol ViewToPresenterListCharactersProtocol: class {
     func getSelectedCharacter(index: Int) -> Character?
     func isNeedUpdateCharacters()
     func getCustomLayout() -> (title: String, customLayout: CustomLayout)?
+    func updateFavoriteCharacter(isFavorite: Bool, character: Character)
 }
 
 protocol PresenterToViewListCharactersProtocol: class {
@@ -32,10 +33,11 @@ protocol PresenterToInteractorListCharactersProtocol: class {
     func updateCharacters()
     func getCustomLayout() -> (title: String, customLayout: CustomLayout)
     var result: Result? { get }
+    func updateFavoriteCharacter(isFavorite: Bool, character: Character)
 }
 
 protocol InteractorToPresenterListCharactersProtocol: class {
-    func getCharactersSuccess()
+    func successResponse()
     func getCharactersFail(errorMessage: String)
     func needUpdateCharacters()
 }
