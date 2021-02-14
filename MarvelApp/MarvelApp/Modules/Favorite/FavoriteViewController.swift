@@ -17,6 +17,7 @@ class FavoriteViewController: UIViewController {
         collectionView.register(AlertCell.self)
         collectionView.register(CharacterCell.self)
         collectionView.collectionViewLayout = presenter?.getCustomLayout() ?? CustomFlowLayout(custom: .grid)
+        self.navigationController?.navigationBar.topItem?.title = Titles.favorite
     }
 }
 

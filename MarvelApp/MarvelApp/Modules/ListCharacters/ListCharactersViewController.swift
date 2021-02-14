@@ -25,6 +25,7 @@ class ListCharactersViewController: UIViewController {
         collectionView.collectionViewLayout = CustomFlowLayout(custom: .grid)
         collectionView.addSubview(refreshControl)
         self.presenter?.getInitialCharacters()
+        self.navigationController?.navigationBar.topItem?.title = Titles.characters
     }
     
     @objc func refreshAction() {
