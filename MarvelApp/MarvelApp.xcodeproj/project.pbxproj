@@ -143,6 +143,17 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		113B237925D9CDD8000BE587 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				11FF3A5E25D737B900C4DBE5 /* SceneDelegate.swift */,
+				11FF3A6225D737B900C4DBE5 /* Main.storyboard */,
+				113B236425D9BF64000BE587 /* MainTabBarController.swift */,
+				11FF3A5C25D737B900C4DBE5 /* AppDelegate.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		11FCA6D525D75B3100BDD6E2 /* Entites */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +167,7 @@
 		11FCA70825D76B9400BDD6E2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				11FCA6D525D75B3100BDD6E2 /* Entites */,
 				1103B71125D8311A002C718A /* Cell */,
 				11FCA70925D76BBD00BDD6E2 /* StringExtension.swift */,
 				11FCA73225D76F4A00BDD6E2 /* Endpoint.swift */,
@@ -191,16 +203,12 @@
 		11FF3A5B25D737B900C4DBE5 /* MarvelApp */ = {
 			isa = PBXGroup;
 			children = (
+				113B237925D9CDD8000BE587 /* Base */,
 				11FCA70825D76B9400BDD6E2 /* Common */,
-				11FCA6D525D75B3100BDD6E2 /* Entites */,
 				11FF3A9725D73E2600C4DBE5 /* Modules */,
-				11FF3A5C25D737B900C4DBE5 /* AppDelegate.swift */,
-				11FF3A5E25D737B900C4DBE5 /* SceneDelegate.swift */,
-				11FF3A6225D737B900C4DBE5 /* Main.storyboard */,
 				11FF3A6525D737BB00C4DBE5 /* Assets.xcassets */,
 				11FF3A6725D737BB00C4DBE5 /* LaunchScreen.storyboard */,
 				11FF3A6A25D737BB00C4DBE5 /* Info.plist */,
-				113B236425D9BF64000BE587 /* MainTabBarController.swift */,
 			);
 			path = MarvelApp;
 			sourceTree = "<group>";

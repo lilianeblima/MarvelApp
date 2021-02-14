@@ -32,7 +32,7 @@ extension Endpoint {
 }
 
 private struct RequestConfig {
-    private static let privateKey = "b75e0a59ccf4b18570394d1f659a74afafe00638"
+    private static let privateKey = ""
     private static let publicKey = "82a9d56fcf00f2202aec2d7798b8b000"
     private static let timestamp = Date().timeIntervalSince1970.description
     private static let hash = "\(timestamp)\(privateKey)\(publicKey)".md5
