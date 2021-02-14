@@ -7,10 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1103B71325D8313A002C718A /* CharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1103B71225D8313A002C718A /* CharacterCell.swift */; };
 		1103B72E25D857D3002C718A /* CustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1103B72D25D857D3002C718A /* CustomFlowLayout.swift */; };
 		1103B75025D8F443002C718A /* FavoriteCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1103B74F25D8F443002C718A /* FavoriteCharacter.swift */; };
 		1103B75D25D8F62C002C718A /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1103B75C25D8F62C002C718A /* Database.swift */; };
+		1103B76225D98502002C718A /* Favorite.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1103B76125D98502002C718A /* Favorite.storyboard */; };
+		1103B76725D999EA002C718A /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1103B76625D999EA002C718A /* FavoriteViewController.swift */; };
+		1103B76C25D99A07002C718A /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1103B76B25D99A07002C718A /* FavoritePresenter.swift */; };
+		1103B77125D99A14002C718A /* FavoriteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1103B77025D99A14002C718A /* FavoriteInteractor.swift */; };
+		1103B77625D99A20002C718A /* FavoriteRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1103B77525D99A20002C718A /* FavoriteRouter.swift */; };
+		1103B77C25D99A68002C718A /* AlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1103B77A25D99A68002C718A /* AlertCell.swift */; };
+		1103B77D25D99A68002C718A /* AlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1103B77B25D99A68002C718A /* AlertCell.xib */; };
+		113B235025D9A73A000BE587 /* CharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B234E25D9A73A000BE587 /* CharacterCell.swift */; };
+		113B235125D9A73A000BE587 /* CharacterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 113B234F25D9A73A000BE587 /* CharacterCell.xib */; };
+		113B235B25D9AB8B000BE587 /* NibReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B235A25D9AB8B000BE587 /* NibReusable.swift */; };
+		113B236025D9AEAE000BE587 /* FavoriteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B235F25D9AEAE000BE587 /* FavoriteProtocol.swift */; };
 		11FCA6D725D75B8800BDD6E2 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FCA6D625D75B8800BDD6E2 /* Character.swift */; };
 		11FCA70425D76B4400BDD6E2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FCA70325D76B4400BDD6E2 /* Result.swift */; };
 		11FCA70A25D76BBD00BDD6E2 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FCA70925D76BBD00BDD6E2 /* StringExtension.swift */; };
@@ -50,10 +60,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1103B71225D8313A002C718A /* CharacterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCell.swift; sourceTree = "<group>"; };
 		1103B72D25D857D3002C718A /* CustomFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFlowLayout.swift; sourceTree = "<group>"; };
 		1103B74F25D8F443002C718A /* FavoriteCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCharacter.swift; sourceTree = "<group>"; };
 		1103B75C25D8F62C002C718A /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		1103B76125D98502002C718A /* Favorite.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Favorite.storyboard; sourceTree = "<group>"; };
+		1103B76625D999EA002C718A /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		1103B76B25D99A07002C718A /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePresenter.swift; sourceTree = "<group>"; };
+		1103B77025D99A14002C718A /* FavoriteInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteInteractor.swift; sourceTree = "<group>"; };
+		1103B77525D99A20002C718A /* FavoriteRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRouter.swift; sourceTree = "<group>"; };
+		1103B77A25D99A68002C718A /* AlertCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCell.swift; sourceTree = "<group>"; };
+		1103B77B25D99A68002C718A /* AlertCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertCell.xib; sourceTree = "<group>"; };
+		113B234E25D9A73A000BE587 /* CharacterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCell.swift; sourceTree = "<group>"; };
+		113B234F25D9A73A000BE587 /* CharacterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterCell.xib; sourceTree = "<group>"; };
+		113B235A25D9AB8B000BE587 /* NibReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibReusable.swift; sourceTree = "<group>"; };
+		113B235F25D9AEAE000BE587 /* FavoriteProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteProtocol.swift; sourceTree = "<group>"; };
 		11532AE14AE6CEE1AE1CFF35 /* Pods_MarvelApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MarvelApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11FCA6D625D75B8800BDD6E2 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		11FCA70325D76B4400BDD6E2 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
@@ -112,8 +132,11 @@
 		1103B71125D8311A002C718A /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				1103B71225D8313A002C718A /* CharacterCell.swift */,
 				1103B72D25D857D3002C718A /* CustomFlowLayout.swift */,
+				1103B77A25D99A68002C718A /* AlertCell.swift */,
+				1103B77B25D99A68002C718A /* AlertCell.xib */,
+				113B234E25D9A73A000BE587 /* CharacterCell.swift */,
+				113B234F25D9A73A000BE587 /* CharacterCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -135,6 +158,7 @@
 				11FCA70925D76BBD00BDD6E2 /* StringExtension.swift */,
 				11FCA73225D76F4A00BDD6E2 /* Endpoint.swift */,
 				1103B75C25D8F62C002C718A /* Database.swift */,
+				113B235A25D9AB8B000BE587 /* NibReusable.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -229,6 +253,12 @@
 		11FF3A9A25D73E7F00C4DBE5 /* Favorite */ = {
 			isa = PBXGroup;
 			children = (
+				1103B76125D98502002C718A /* Favorite.storyboard */,
+				1103B76625D999EA002C718A /* FavoriteViewController.swift */,
+				1103B76B25D99A07002C718A /* FavoritePresenter.swift */,
+				1103B77025D99A14002C718A /* FavoriteInteractor.swift */,
+				1103B77525D99A20002C718A /* FavoriteRouter.swift */,
+				113B235F25D9AEAE000BE587 /* FavoriteProtocol.swift */,
 			);
 			path = Favorite;
 			sourceTree = "<group>";
@@ -355,9 +385,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				113B235125D9A73A000BE587 /* CharacterCell.xib in Resources */,
 				11FF3AA725D7437400C4DBE5 /* ListCharacters.storyboard in Resources */,
 				11FF3A6925D737BB00C4DBE5 /* LaunchScreen.storyboard in Resources */,
 				11FF3A6625D737BB00C4DBE5 /* Assets.xcassets in Resources */,
+				1103B76225D98502002C718A /* Favorite.storyboard in Resources */,
+				1103B77D25D99A68002C718A /* AlertCell.xib in Resources */,
 				11FF3A6425D737B900C4DBE5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -425,19 +458,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1103B77C25D99A68002C718A /* AlertCell.swift in Sources */,
+				1103B77625D99A20002C718A /* FavoriteRouter.swift in Sources */,
 				11FF3AB425D7485200C4DBE5 /* ListCharacterPresenter.swift in Sources */,
+				113B235025D9A73A000BE587 /* CharacterCell.swift in Sources */,
 				11FCA74225D7817700BDD6E2 /* ListCharactersProtocol.swift in Sources */,
 				11FF3AAF25D7483100C4DBE5 /* ListCharactersViewController.swift in Sources */,
-				1103B71325D8313A002C718A /* CharacterCell.swift in Sources */,
 				11FCA6D725D75B8800BDD6E2 /* Character.swift in Sources */,
 				1103B75025D8F443002C718A /* FavoriteCharacter.swift in Sources */,
+				1103B76C25D99A07002C718A /* FavoritePresenter.swift in Sources */,
 				1103B72E25D857D3002C718A /* CustomFlowLayout.swift in Sources */,
 				11FF3A6125D737B900C4DBE5 /* ViewController.swift in Sources */,
+				1103B77125D99A14002C718A /* FavoriteInteractor.swift in Sources */,
 				11FCA73325D76F4A00BDD6E2 /* Endpoint.swift in Sources */,
 				11FF3A5D25D737B900C4DBE5 /* AppDelegate.swift in Sources */,
+				113B235B25D9AB8B000BE587 /* NibReusable.swift in Sources */,
 				11FCA70A25D76BBD00BDD6E2 /* StringExtension.swift in Sources */,
 				11FF3AB925D7487500C4DBE5 /* ListCharactersInteractor.swift in Sources */,
+				1103B76725D999EA002C718A /* FavoriteViewController.swift in Sources */,
 				11FCA70425D76B4400BDD6E2 /* Result.swift in Sources */,
+				113B236025D9AEAE000BE587 /* FavoriteProtocol.swift in Sources */,
 				11FF3A5F25D737B900C4DBE5 /* SceneDelegate.swift in Sources */,
 				1103B75D25D8F62C002C718A /* Database.swift in Sources */,
 				11FCA74F25D7856300BDD6E2 /* ListCharactersRouter.swift in Sources */,

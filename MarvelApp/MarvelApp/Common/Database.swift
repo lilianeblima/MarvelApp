@@ -7,45 +7,62 @@
 
 import UIKit
 import RealmSwift
+
 class Database {
-    
-    func save(favoriteCharacter: FavoriteCharacter, completion: @escaping (_ success: Bool) -> Void) {
+
+    typealias CompletionHandler = (_ success: Bool, _ errorMessage: String?) -> Void
+
+    func save(favoriteCharacter: FavoriteCharacter, completion: CompletionHandler) {
         do {
             let realm = try Realm()
             try realm.write {
                 realm.add(favoriteCharacter)
-                completion(true)
+                completion(true, nil)
             }
-        } catch {
-            completion(false)
+        } catch let error {
+            completion(false, error.localizedDescription)
         }
     }
     
-    func getAllElements(completion: @escaping (_ success: Bool, _ favorites: [FavoriteCharacter]?) -> Void) {
-        DispatchQueue(label: "background").async {
-            autoreleasepool {
-                do {
-                    let realm = try Realm()
-                    let favorites = Array(realm.objects(FavoriteCharacter.self))
-                    completion(true, favorites)
-                } catch {
-                    completion(false, nil)
-                }
+    func getAllElements() -> [FavoriteCharacter] {
+        autoreleasepool {
+            do {
+                let realm = try Realm()
+                let favorites = Array(realm.objects(FavoriteCharacter.self))
+                return favorites
+            } catch {
+                return []
             }
         }
     }
     
-    func delete(favoriteId: Int, completion: @escaping (_ success: Bool) -> Void) {
+    func remove(favoriteId: Int, completion: CompletionHandler) {
         do {
             let realm = try Realm()
             guard let favoriteCharacter = realm.objects(FavoriteCharacter.self).filter("id==\(favoriteId)").first else {
-                completion(false)
+                completion(false, "Não existe o objeto salvo")
                 return
             }
-            realm.delete(favoriteCharacter)
-            completion(true)
-        } catch {
-            completion(false)
+            try realm.write {
+                realm.delete(favoriteCharacter)
+            }
+            completion(true, nil)
+        } catch let error {
+            completion(false, error.localizedDescription)
+        }
+    }
+    
+    func clear() {
+        do {
+            let realm = try Realm()
+            let items = realm.objects(FavoriteCharacter.self)
+            try realm.write {
+                for item in items {
+                    realm.delete(item)
+                }
+            }
+        } catch let error {
+            print(error)
         }
     }
 

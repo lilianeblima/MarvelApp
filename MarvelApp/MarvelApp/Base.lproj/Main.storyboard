@@ -34,10 +34,10 @@
             </objects>
             <point key="canvasLocation" x="34.782608695652179" y="43.526785714285715"/>
         </scene>
-        <!--ListCharacters-->
+        <!--Favorite-->
         <scene sceneID="efT-Xt-wh8">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="ListCharacters" storyboardName="ListCharacters" id="El5-j1-pWk" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Favorite" id="El5-j1-pWk" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="6b3-YM-Hhy"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OGr-Ht-UOd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

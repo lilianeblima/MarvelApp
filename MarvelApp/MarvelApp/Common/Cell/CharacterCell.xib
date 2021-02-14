@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="gTV-IL-0wX" customClass="CharacterCell" customModule="MarvelApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="238" height="253"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="238" height="253"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERQ-EZ-Fyg">
+                        <rect key="frame" x="10" y="222" width="188" height="16"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UXe-x1-byx">
+                        <rect key="frame" x="10" y="20" width="218" height="95"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="UXe-x1-byx" secondAttribute="height" multiplier="2:1" priority="750" id="M8Z-X1-RI1"/>
+                            <constraint firstAttribute="height" constant="95" id="qW9-AJ-ooU"/>
+                        </constraints>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XkL-4s-fE0">
+                        <rect key="frame" x="208" y="220" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="XkL-4s-fE0" secondAttribute="height" multiplier="1:1" id="1aj-19-xhP"/>
+                            <constraint firstAttribute="height" constant="20" id="dbI-Dp-lRD"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WgQ-K0-p1A">
+                        <rect key="frame" x="198" y="210" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="WgQ-K0-p1A" secondAttribute="height" multiplier="1:1" id="HPJ-gV-aBX"/>
+                            <constraint firstAttribute="width" constant="40" id="rfS-X7-cYa"/>
+                        </constraints>
+                        <connections>
+                            <action selector="favoriteAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="8Ev-UX-Njo"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="WgQ-K0-p1A" firstAttribute="centerX" secondItem="XkL-4s-fE0" secondAttribute="centerX" id="0pO-fd-s4r"/>
+                <constraint firstItem="XkL-4s-fE0" firstAttribute="centerY" secondItem="ERQ-EZ-Fyg" secondAttribute="centerY" id="4ad-hC-xFh"/>
+                <constraint firstItem="WgQ-K0-p1A" firstAttribute="centerY" secondItem="XkL-4s-fE0" secondAttribute="centerY" id="7hX-wj-wyF"/>
+                <constraint firstAttribute="trailing" secondItem="UXe-x1-byx" secondAttribute="trailing" constant="10" id="892-a6-1on"/>
+                <constraint firstItem="XkL-4s-fE0" firstAttribute="trailing" secondItem="UXe-x1-byx" secondAttribute="trailing" id="Aw6-VW-xxu"/>
+                <constraint firstItem="ERQ-EZ-Fyg" firstAttribute="leading" secondItem="UXe-x1-byx" secondAttribute="leading" id="MPf-qK-pru"/>
+                <constraint firstItem="UXe-x1-byx" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="QbO-Qd-zMC"/>
+                <constraint firstAttribute="bottom" secondItem="ERQ-EZ-Fyg" secondAttribute="bottom" constant="15" id="qt3-vW-hoj"/>
+                <constraint firstItem="XkL-4s-fE0" firstAttribute="leading" secondItem="ERQ-EZ-Fyg" secondAttribute="trailing" constant="10" id="w1j-06-D4c"/>
+                <constraint firstItem="UXe-x1-byx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="xLr-6e-iJt"/>
+            </constraints>
+            <size key="customSize" width="238" height="253"/>
+            <connections>
+                <outlet property="favoriteButton" destination="WgQ-K0-p1A" id="xR1-J6-om1"/>
+                <outlet property="favoriteImage" destination="UXe-x1-byx" id="d7L-V6-yPi"/>
+                <outlet property="imageCharacter" destination="XkL-4s-fE0" id="hdb-If-obb"/>
+                <outlet property="nameLabel" destination="ERQ-EZ-Fyg" id="Kuq-Ml-EzI"/>
+            </connections>
+            <point key="canvasLocation" x="155.07246376811597" y="157.70089285714286"/>
+        </collectionViewCell>
+    </objects>
+</document>

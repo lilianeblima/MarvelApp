@@ -13,17 +13,22 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
     var result: Result?
     private var wating: Bool = false
     var currentLayoutCollection: CustomLayout = .grid
+    private var favorites: [FavoriteCharacter] = []
+    private let database = Database()
+    typealias CompletionHandler = (_ success: Bool, _ errorMessage: String?) -> Void
 
     func getCharacters() {
         guard let url = RequestEndpoint.characters(customQuery: nil).url else {
             //TO DO: tratamento de erro
             return
         }
+        favorites = database.getAllElements() ?? []
         Alamofire.request(url).response { response in
             if let data = response.data {
                 do {
                     let decoder = try JSONDecoder().decode(Result.self, from: data)
                     self.result = decoder
+                    self.updateFavorite()
                     self.presenter?.successResponse()
                 } catch let error {
                     // Tratamento de erro
@@ -31,6 +36,15 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
                 }
             } else {
                 // Tratamento de erro
+            }
+        }
+    }
+    
+    func updateFavorite() {
+        for item in favorites  {
+            if let index = self.result?.data.allCharacters.firstIndex(where: { $0.id == item.id }) {
+                self.result?.data.allCharacters[index].isFavorite = true
+                favorites.removeAll(where: { $0.id == item.id })
             }
         }
     }
@@ -69,6 +83,7 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
         for character in newCharacters {
             result?.data.allCharacters.append(character)
         }
+        updateFavorite()
     }
     
     func getQuery() -> [String: String] {
@@ -86,39 +101,34 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
         return(buttonTitle, customLayout)
     }
     
+    // MARK: - FAvorite Action
     func updateFavoriteCharacter(isFavorite: Bool, character: Character) {
-        guard let favoriteCharacter = character.convertToFavorite() else {
-            //Tratativa erro
-            return
-        }
-        let database = Database()
-        database.save(favoriteCharacter: favoriteCharacter) { success in
-            //Trataiva
+        selectedActionFavorite(withCharacter: character, isFavorite: isFavorite) { success, _  in
             if success, let index = self.result?.data.allCharacters.firstIndex(where: { $0.id == character.id }) {
-                self.result?.data.allCharacters[index].isFavorite = true
+                self.result?.data.allCharacters[index].isFavorite = isFavorite
+                // Ou atualizar só a celula?
+                self.presenter?.successResponse()
+            } else {
+                // Error
             }
-            self.presenter?.successResponse()
         }
     }
     
-    // TODO: Remover
-    func getCharacters(completion: @escaping (_ characters: [Character]?, _ errorMessage: String?) -> Void) {
-        guard let url = RequestEndpoint.characters(customQuery: nil).url else {
-            //TO DO: tratamento de erro
-            return
+    func selectedActionFavorite(withCharacter: Character, isFavorite: Bool, completion: CompletionHandler) {
+        if !isFavorite {
+            removeCharacterFavorite(withCharacter: withCharacter, completion: completion)
+        } else if isFavorite, let favoriteCharacter = withCharacter.convertToFavorite() {
+            saveNewCharacterFavorite(withCharacter: favoriteCharacter, completion: completion)
+        } else {
+            completion(false, "Erro ao converter objeto")
         }
-        Alamofire.request(url).response { response in
-            if let data = response.data {
-                do {
-                    let decoder = try JSONDecoder().decode(Result.self, from: data)
-                    completion(decoder.data.allCharacters, nil)
-                } catch let error {
-                    // Tratamento de erro
-                    print(error)
-                }
-            } else {
-                // Tratamento de erro
-            }
-        }
+    }
+    
+    func saveNewCharacterFavorite(withCharacter:FavoriteCharacter, completion: CompletionHandler) {
+        database.save(favoriteCharacter: withCharacter, completion: completion)
+    }
+    
+    func removeCharacterFavorite(withCharacter: Character, completion: CompletionHandler) {
+        database.remove(favoriteId: withCharacter.id, completion: completion)
     }
 }

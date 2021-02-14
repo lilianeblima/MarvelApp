@@ -37,24 +37,29 @@ private struct RequestConfig {
     private static let timestamp = Date().timeIntervalSince1970.description
     private static let hash = "\(timestamp)\(privateKey)\(publicKey)".md5
     static let parameters = ["apikey": publicKey, "ts": timestamp, "hash": hash]
+    static let customQuery: [String: String] = ["limit": "20"]
 }
  
 
 enum RequestEndpoint {
-    case characters
+    case characters(customQuery: [String: String]?)
 }
 
 extension RequestEndpoint: Endpoint {
-    var query: [String : String] {
+    var query: [String: String] {
         switch self {
-        case .characters:
-            return ["limit": "20"]
+        case .characters(let customQuery):
+            var currentQuery = RequestConfig.customQuery
+            if let customQuery = customQuery {
+                currentQuery.merge(customQuery)
+            }
+            return currentQuery
         }
     }
     
     var path: String {
         switch self {
-        case .characters:
+        case .characters(_):
             return "/v1/public/characters"
         }
     }

@@ -12,19 +12,13 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let list = ListCharactersInteractor()
-        list.getCharacters { (characters, errorMessage) in
-            print(characters)
-            print(errorMessage)
-        }
-        //getAllCharacters()
-        //getListCharacters()
-        // Do any additional setup after loading the view.
     }
 
     @IBAction func nextAction(_ sender: Any) {
         
-        let router = ListCharactersRouter.createModule()
+//        let router = ListCharactersRouter.createModule()
+//        self.navigationController?.pushViewController(router, animated: true)
+        let router = FavoriteRouter.createModule()
         self.navigationController?.pushViewController(router, animated: true)
     }
     func getAllCharacters() {
