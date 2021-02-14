@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Gh6-jv-Pm8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Uxm-Si-rBM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -116,9 +116,16 @@
                             <constraint firstItem="i0I-NU-2mX" firstAttribute="top" secondItem="FTa-IU-bfT" secondAttribute="top" id="Jvk-Ml-b1f"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Xvh-nq-hjc"/>
+                    <navigationItem key="navigationItem" id="Xvh-nq-hjc">
+                        <barButtonItem key="rightBarButtonItem" title="Lista" id="XSV-WS-woN">
+                            <connections>
+                                <action selector="changeListStyleAction:" destination="Gh6-jv-Pm8" id="xfo-L4-hN6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="i0I-NU-2mX" id="4Bi-kA-9bQ"/>
+                        <outlet property="rightButtonItem" destination="XSV-WS-woN" id="VUS-Ie-DcI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Oa-7u-J13" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -9,7 +9,24 @@ import UIKit
 
 class ListCharactersViewController: UIViewController {
     
-    
+    @IBOutlet weak var rightButtonItem: UIBarButtonItem!
+    var currentLayoutCollection: CustomLayout = .grid
+    @IBAction func changeListStyleAction(_ sender: UIBarButtonItem) {
+
+        var customLayout = CustomLayout.grid
+        var buttonTitle = "Lista"
+        if currentLayoutCollection == .grid {
+            customLayout = CustomLayout.list
+            buttonTitle = "Grid"
+        }
+        
+        rightButtonItem.title = buttonTitle
+        currentLayoutCollection = customLayout
+        UIView.animate(withDuration: 0.2) { () -> Void in
+            self.collectionView.collectionViewLayout.invalidateLayout()
+            self.collectionView.setCollectionViewLayout(CustomFlowLayout(custom: customLayout), animated: true)
+        }
+    }
     @IBOutlet weak var collectionView: UICollectionView!
     var presenter: ViewToPresenterListCharactersProtocol?
     
@@ -27,7 +44,7 @@ class ListCharactersViewController: UIViewController {
             }
         }
        // presenter?.getCharacters()
-        collectionView.collectionViewLayout = CustomFlowLayout(custom: .list)
+        collectionView.collectionViewLayout = CustomFlowLayout(custom: .grid)
         collectionView.dataSource = self
         collectionView.delegate = self
 
