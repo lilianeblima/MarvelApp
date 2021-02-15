@@ -9,17 +9,28 @@ import UIKit
 
 
 protocol ExtrasUpdate {
-    var character: Character? { get set }
-    func update(character: Character?)
+    func update(character: Character?, action: ActionCell, customLayout: CustomFlowLayout)
+}
+
+enum ActionCell {
+    case showResult
+    case loading
+    case errorMessage(message: String)
 }
 
 class ExtrasCollectionViewController: UICollectionViewController, ExtrasUpdate {
-    func update(character: Character?) {
+    func update(character: Character?, action: ActionCell, customLayout: CustomFlowLayout) {
         self.character = character
+        self.action = action
+        self.collectionView.collectionViewLayout =  customLayout
         collectionView.reloadData()
     }
     
     var character: Character?
+    var action: ActionCell = .loading
+    var isLoading: Bool {
+        return character?.comics == nil ? true : false
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,12 +38,8 @@ class ExtrasCollectionViewController: UICollectionViewController, ExtrasUpdate {
         // Register cell classes
         self.collectionView.register(AlertCell.self)
         self.collectionView.register(CharacterCell.self)
-        self.collectionView.collectionViewLayout =  CustomFlowLayout(custom: .grid, direction: .horizontal, height: 190)
-//        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-//              flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-//        }
-        
-
+        self.collectionView.register(LoadingCell.self)
+        self.collectionView.collectionViewLayout =  CustomFlowLayout(custom: .list, direction: .horizontal, height: 190)
     }
 
     // MARK: UICollectionViewDataSource
@@ -43,47 +50,43 @@ class ExtrasCollectionViewController: UICollectionViewController, ExtrasUpdate {
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return character?.comics?.count ?? 0
+        return character?.comics?.count ?? 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch action {
+        case .loading:
+            return collectionView.fillCellLoading(indexPath: indexPath)
+        case .showResult:
+            return fillCellResult(indexPath: indexPath)
+        case .errorMessage(let message):
+            return collectionView.fillCellError(withMessage: message, indexPath: indexPath)
+        }
+    }
+    
+    private func fillCellResult(indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell: CharacterCell = collectionView.dequeueReusableCell(for: indexPath), let item = character?.comics?[indexPath.row] else {
             return UICollectionViewCell()
         }
         cell.configureExtras(item: item)
-    
         return cell
     }
+}
 
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
+extension UICollectionView {
+    func fillCellError(withMessage message: String, indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell: AlertCell = self.dequeueReusableCell(for: indexPath) else {
+            return UICollectionViewCell()
+        }
+        cell.configure(withMessage: message)
+        return cell
     }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
     
+    func fillCellLoading(indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell: LoadingCell = self.dequeueReusableCell(for: indexPath) else {
+            return UICollectionViewCell()
+        }
+        cell.start()
+        return cell
     }
-    */
-
 }

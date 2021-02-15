@@ -30,6 +30,7 @@ class DetailCharacterInteractor: PresenterToInteracatorDetailCharacterProtocol {
     }
     
     func getCommicsImage() {
+        
         if !(character?.comics?.isEmpty ?? false), let url = RequestEndpoint.character(characterId: String(character?.id ?? 0), extra: "comics").url {
             Alamofire.request(url).response { response in
                 if let data = response.data {
@@ -38,7 +39,7 @@ class DetailCharacterInteractor: PresenterToInteracatorDetailCharacterProtocol {
                         self.result = decoder
                         self.character?.comics = decoder.data.results
                         print(decoder)
-                        self.presenter?.updateWithCommicImages()
+                        self.presenter?.updateWithCommicImages(action: self.action().action, customLayout: self.action().layout)
                     } catch let error {
                         print(error)
                         // Tratamento de erro
@@ -50,4 +51,12 @@ class DetailCharacterInteractor: PresenterToInteracatorDetailCharacterProtocol {
         }
     }
     
+    func action() -> (action: ActionCell, layout: CustomFlowLayout) {
+        if let commics = character?.comics, !commics.isEmpty {
+            return (action: .showResult, layout: CustomFlowLayout(custom: .grid, direction: .horizontal, height: 190))
+        } else if let commics = character?.comics, !commics.isEmpty {
+            return (action: .errorMessage(message: "Não tem commics"), layout: CustomFlowLayout(custom: .list, direction: .horizontal, height: 190))
+        }
+        return (action: .errorMessage(message: "Ops"), layout: CustomFlowLayout(custom: .list, direction: .horizontal, height: 150))
+    }
 }

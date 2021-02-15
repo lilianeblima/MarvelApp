@@ -21,5 +21,10 @@ class AlertCell: UICollectionViewCell, NibReusable {
         infoLabel.text = "Ops! Você ainda não tem nenhum personagem favorito"
         iconImage.image = UIImage(named: "NoFavorite")
     }
+    
+    func configure(withMessage message: String) {
+        infoLabel.text = message
+        iconImage.image = UIImage(named: "NoFavorite")
+    }
 
 }

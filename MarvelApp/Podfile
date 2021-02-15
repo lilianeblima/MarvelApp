@@ -10,5 +10,6 @@ target 'MarvelApp' do
   pod 'Kingfisher'
   pod 'Realm'
   pod 'RealmSwift'
+  pod 'Reachability'
 
 end

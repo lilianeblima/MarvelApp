@@ -63,8 +63,8 @@ extension DetailCharacterTableViewController: PresenterToViewDetailCharacterProt
         characterImage.kf.setImage(with: stringImage)
     }
     
-    func updateWithCommicImages() {
-        delegateCollection?.update(character: presenter?.getCurrentCharacter())
+    func updateWithCommicImages(action: ActionCell, customLayout: CustomFlowLayout) {
+        delegateCollection?.update(character: presenter?.getCurrentCharacter(), action: action, customLayout: customLayout)
     }
     
 }

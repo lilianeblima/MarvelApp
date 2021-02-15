@@ -162,15 +162,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cHW-Qc-j0c">
-                                                    <rect key="frame" x="20" y="21" width="71" height="25"/>
+                                                    <rect key="frame" x="20" y="21" width="71" height="56"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mEL-Nw-QZN">
-                                                    <rect key="frame" x="20" y="56" width="374" height="200"/>
+                                                    <rect key="frame" x="20" y="87" width="374" height="190"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="200" id="xD2-I9-aco"/>
+                                                        <constraint firstAttribute="height" constant="190" id="xD2-I9-aco"/>
                                                     </constraints>
                                                     <connections>
                                                         <segue destination="P72-w3-jaM" kind="embed" id="iYo-fr-nNS"/>
@@ -178,7 +178,7 @@
                                                 </containerView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="mEL-Nw-QZN" secondAttribute="bottom" constant="10" id="0p1-5r-07e"/>
+                                                <constraint firstAttribute="bottom" secondItem="mEL-Nw-QZN" secondAttribute="bottom" id="2Q8-6X-CEr"/>
                                                 <constraint firstItem="cHW-Qc-j0c" firstAttribute="top" secondItem="Dw8-gx-Wcw" secondAttribute="topMargin" constant="10" id="L0o-CX-VBn"/>
                                                 <constraint firstItem="mEL-Nw-QZN" firstAttribute="trailing" secondItem="Dw8-gx-Wcw" secondAttribute="trailingMargin" id="hXV-Ov-u9v"/>
                                                 <constraint firstItem="cHW-Qc-j0c" firstAttribute="leading" secondItem="Dw8-gx-Wcw" secondAttribute="leadingMargin" id="qsc-fE-E7X"/>
@@ -239,7 +239,7 @@
             <objects>
                 <collectionViewController id="P72-w3-jaM" customClass="ExtrasCollectionViewController" customModule="MarvelApp" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Gnv-BQ-D6h">
-                        <rect key="frame" x="0.0" y="0.0" width="374" height="200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="190"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3aT-5q-XFQ">

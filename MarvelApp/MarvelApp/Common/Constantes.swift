@@ -35,3 +35,9 @@ struct Buttons {
 struct Messages {
     static let noDescription = "Sem descrição."
 }
+
+struct ErrorMessage {
+    static let urlError = "URL incorreta"
+    static let noConnection = "Sem conexão, por favor verificar a internet."
+    static let defaultMessage = "Tivemos um problema, tente novamente mais tarde"
+}

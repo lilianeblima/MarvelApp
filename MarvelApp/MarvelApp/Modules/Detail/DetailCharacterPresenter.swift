@@ -42,8 +42,8 @@ extension DetailCharacterPresenter: InteractorToPresenterDetailCharacterProtocol
         view?.updateWithStringImage(stringImage: stringImage)
     }
     
-    func updateWithCommicImages() {
-        view?.updateWithCommicImages()
+    func updateWithCommicImages(action: ActionCell, customLayout: CustomFlowLayout) {
+        view?.updateWithCommicImages(action: action, customLayout: customLayout)
     }
 
 }

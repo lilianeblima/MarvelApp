@@ -31,13 +31,13 @@ protocol PresenterToInteracatorDetailCharacterProtocol: class {
 protocol InteractorToPresenterDetailCharacterProtocol: class {
     func updateWithImage(image: UIImage)
     func updateWithStringImage(stringImage: URL)
-    func updateWithCommicImages()
+    func updateWithCommicImages(action: ActionCell, customLayout: CustomFlowLayout)
 }
 
 protocol PresenterToViewDetailCharacterProtocol: class {
     func updateWithImage(image: UIImage)
     func updateWithStringImage(stringImage: URL)
-    func updateWithCommicImages()
+    func updateWithCommicImages(action: ActionCell, customLayout: CustomFlowLayout)
 }
 
 protocol PresenterToRouterDetailProtocol: class {

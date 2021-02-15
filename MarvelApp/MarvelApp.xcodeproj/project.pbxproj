@@ -31,8 +31,10 @@
 		113B236025D9AEAE000BE587 /* FavoriteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B235F25D9AEAE000BE587 /* FavoriteProtocol.swift */; };
 		113B236525D9BF64000BE587 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B236425D9BF64000BE587 /* MainTabBarController.swift */; };
 		113B237525D9CCCF000BE587 /* Constantes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B237425D9CCCF000BE587 /* Constantes.swift */; };
+		116BACCE25DAFD4B00CDB67A /* CustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116BACCD25DAFD4B00CDB67A /* CustomLayout.swift */; };
 		118B4D4525DAC0D0009939BB /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118B4D4325DAC0D0009939BB /* LoadingCell.swift */; };
 		118B4D4625DAC0D0009939BB /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 118B4D4425DAC0D0009939BB /* LoadingCell.xib */; };
+		118B4D5D25DAF010009939BB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118B4D5C25DAF010009939BB /* NetworkManager.swift */; };
 		11FCA6D725D75B8800BDD6E2 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FCA6D625D75B8800BDD6E2 /* Character.swift */; };
 		11FCA70425D76B4400BDD6E2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FCA70325D76B4400BDD6E2 /* Result.swift */; };
 		11FCA70A25D76BBD00BDD6E2 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FCA70925D76BBD00BDD6E2 /* StringExtension.swift */; };
@@ -96,8 +98,10 @@
 		113B236425D9BF64000BE587 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		113B237425D9CCCF000BE587 /* Constantes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constantes.swift; sourceTree = "<group>"; };
 		11532AE14AE6CEE1AE1CFF35 /* Pods_MarvelApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MarvelApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		116BACCD25DAFD4B00CDB67A /* CustomLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLayout.swift; sourceTree = "<group>"; };
 		118B4D4325DAC0D0009939BB /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		118B4D4425DAC0D0009939BB /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
+		118B4D5C25DAF010009939BB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		11FCA6D625D75B8800BDD6E2 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		11FCA70325D76B4400BDD6E2 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		11FCA70925D76BBD00BDD6E2 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
@@ -193,6 +197,15 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		118B4D6125DAF7FA009939BB /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				11FCA73225D76F4A00BDD6E2 /* Endpoint.swift */,
+				118B4D5C25DAF010009939BB /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		11FCA6D525D75B3100BDD6E2 /* Entites */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +214,7 @@
 				1103B74F25D8F443002C718A /* FavoriteCharacter.swift */,
 				113323BA25DA362800783BDE /* Extras.swift */,
 				111DAAD225DA4D15006A9E84 /* ResultExtras.swift */,
+				116BACCD25DAFD4B00CDB67A /* CustomLayout.swift */,
 			);
 			path = Entites;
 			sourceTree = "<group>";
@@ -208,11 +222,11 @@
 		11FCA70825D76B9400BDD6E2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				118B4D6125DAF7FA009939BB /* Network */,
 				1133238F25D9DD3500783BDE /* Storyboards */,
 				11FCA6D525D75B3100BDD6E2 /* Entites */,
 				1103B71125D8311A002C718A /* Cell */,
 				11FCA70925D76BBD00BDD6E2 /* StringExtension.swift */,
-				11FCA73225D76F4A00BDD6E2 /* Endpoint.swift */,
 				1103B75C25D8F62C002C718A /* Database.swift */,
 				113B235A25D9AB8B000BE587 /* NibReusable.swift */,
 				113B237425D9CCCF000BE587 /* Constantes.swift */,
@@ -517,6 +531,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1103B77C25D99A68002C718A /* AlertCell.swift in Sources */,
+				116BACCE25DAFD4B00CDB67A /* CustomLayout.swift in Sources */,
 				1103B77625D99A20002C718A /* FavoriteRouter.swift in Sources */,
 				113B236525D9BF64000BE587 /* MainTabBarController.swift in Sources */,
 				118B4D4525DAC0D0009939BB /* LoadingCell.swift in Sources */,
@@ -526,6 +541,7 @@
 				1133239C25DA1E6A00783BDE /* ExtrasCollectionViewController.swift in Sources */,
 				113323AB25DA205200783BDE /* DetailCharacterRouter.swift in Sources */,
 				113B237525D9CCCF000BE587 /* Constantes.swift in Sources */,
+				118B4D5D25DAF010009939BB /* NetworkManager.swift in Sources */,
 				11FCA74225D7817700BDD6E2 /* ListCharactersProtocol.swift in Sources */,
 				11FF3AAF25D7483100C4DBE5 /* ListCharactersViewController.swift in Sources */,
 				11FCA6D725D75B8800BDD6E2 /* Character.swift in Sources */,
@@ -654,7 +670,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -709,7 +725,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -726,7 +742,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4RLR8FUC4X;
+				DEVELOPMENT_TEAM = KW44L7584U;
 				INFOPLIST_FILE = MarvelApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
