@@ -34,6 +34,7 @@
 		116BACCE25DAFD4B00CDB67A /* CustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116BACCD25DAFD4B00CDB67A /* CustomLayout.swift */; };
 		116BACD325DB097500CDB67A /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116BACD225DB097500CDB67A /* Endpoint.swift */; };
 		116BACDB25DB0F1000CDB67A /* SeriesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116BACDA25DB0F1000CDB67A /* SeriesCollectionViewController.swift */; };
+		116BACEE25DB13C000CDB67A /* FavoriteTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116BACED25DB13C000CDB67A /* FavoriteTest.swift */; };
 		118B4D4525DAC0D0009939BB /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118B4D4325DAC0D0009939BB /* LoadingCell.swift */; };
 		118B4D4625DAC0D0009939BB /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 118B4D4425DAC0D0009939BB /* LoadingCell.xib */; };
 		118B4D5D25DAF010009939BB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118B4D5C25DAF010009939BB /* NetworkManager.swift */; };
@@ -102,6 +103,7 @@
 		116BACCD25DAFD4B00CDB67A /* CustomLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLayout.swift; sourceTree = "<group>"; };
 		116BACD225DB097500CDB67A /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Endpoint.swift; path = MarvelApp/Common/Endpoint.swift; sourceTree = SOURCE_ROOT; };
 		116BACDA25DB0F1000CDB67A /* SeriesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesCollectionViewController.swift; sourceTree = "<group>"; };
+		116BACED25DB13C000CDB67A /* FavoriteTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTest.swift; sourceTree = "<group>"; };
 		118B4D4325DAC0D0009939BB /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		118B4D4425DAC0D0009939BB /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 		118B4D5C25DAF010009939BB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -200,6 +202,14 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		116BACE125DB12E900CDB67A /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				116BACED25DB13C000CDB67A /* FavoriteTest.swift */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
 		118B4D6125DAF7FA009939BB /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,6 +285,7 @@
 		11FF3A7225D737BC00C4DBE5 /* MarvelAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				116BACE125DB12E900CDB67A /* Favorite */,
 				11FF3A7325D737BC00C4DBE5 /* MarvelAppTests.swift */,
 				11FF3A7525D737BC00C4DBE5 /* Info.plist */,
 			);
@@ -577,6 +588,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11FF3A7425D737BC00C4DBE5 /* MarvelAppTests.swift in Sources */,
+				116BACEE25DB13C000CDB67A /* FavoriteTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

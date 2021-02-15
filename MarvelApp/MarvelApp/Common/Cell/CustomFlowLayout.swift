@@ -24,8 +24,8 @@ enum CustomLayout {
 class CustomFlowLayout: UICollectionViewFlowLayout {
     
     var itemHeight: CGFloat = 180
-    private var customType: CustomLayout = .grid
-    private var direction: UICollectionView.ScrollDirection = .vertical
+    var customType: CustomLayout = .grid
+    var direction: UICollectionView.ScrollDirection = .vertical
     
     override init() {
         super.init()
@@ -79,4 +79,3 @@ class CustomFlowLayout: UICollectionViewFlowLayout {
         return collectionView?.contentOffset ?? CGPoint(x: 0, y: 0)
     }
 }
-
