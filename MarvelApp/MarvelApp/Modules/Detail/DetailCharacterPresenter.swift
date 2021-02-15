@@ -13,18 +13,37 @@ class DetailCharacterPresenter: ViewToPresenterDetailCharacterProtocol {
     var interactor: PresenterToInteracatorDetailCharacterProtocol?
     
     func fillDescription() -> String {
-        if let description = interactor?.character?.description, description.isEmpty {
-            return "Sem descrição"
-        }
-        return interactor?.character?.description ?? "Sem descrição"
+        interactor?.fillDescription() ?? Messages.noDescription
     }
     
-    func fillImage() -> UIImage {
-        (interactor?.character?.image)!
+    func fillImage() {
+        interactor?.fillImage()
     }
-
+    
+    func navigationTitle() -> String {
+        interactor?.character?.name ?? String()
+    }
+    
+    func getCurrentCharacter() -> Character? {
+        interactor?.character
+    }
+    
+    func getCommicsImage() {
+        interactor?.getCommicsImage()
+    }
 }
 
 extension DetailCharacterPresenter: InteractorToPresenterDetailCharacterProtocol {
+    func updateWithImage(image: UIImage) {
+        view?.updateWithImage(image: image)
+    }
     
+    func updateWithStringImage(stringImage: URL) {
+        view?.updateWithStringImage(stringImage: stringImage)
+    }
+    
+    func updateWithCommicImages() {
+        view?.updateWithCommicImages()
+    }
+
 }

@@ -15,7 +15,7 @@ enum CustomLayout {
         switch self {
         case .grid:
             return 180
-        default:
+        case .list:
             return 150
         }
     }
@@ -25,15 +25,22 @@ class CustomFlowLayout: UICollectionViewFlowLayout {
     
     var itemHeight: CGFloat = 180
     private var customType: CustomLayout = .grid
+    private var direction: UICollectionView.ScrollDirection = .vertical
     
     override init() {
         super.init()
         setupLayout()
     }
     
-    init(custom: CustomLayout) {
+    init(custom: CustomLayout, direction: UICollectionView.ScrollDirection = .vertical, height: CGFloat? = nil) {
         self.customType = custom
-        self.itemHeight = customType.getHeight()
+        if let height = height {
+            self.itemHeight = height
+        } else {
+            self.itemHeight = customType.getHeight()
+        }
+        
+        self.direction = direction
         super.init()
         setupLayout()
     }
@@ -46,14 +53,16 @@ class CustomFlowLayout: UICollectionViewFlowLayout {
     func setupLayout() {
         minimumInteritemSpacing = 1
         minimumLineSpacing = 1
-        scrollDirection = .vertical
+        scrollDirection = direction
     }
     
     var itemWidth: CGFloat {
-        if customType == .grid {
+        switch customType {
+        case .list:
+            return collectionView?.frame.width ?? 0.0
+        default:
             return (collectionView?.frame.width ?? 0.0) / 2 - 1
         }
-        return collectionView?.frame.width ?? 0.0
     }
     
     override var itemSize: CGSize {

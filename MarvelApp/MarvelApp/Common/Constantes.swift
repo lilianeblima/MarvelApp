@@ -31,3 +31,7 @@ struct Buttons {
     static let list = "Lista"
     static let grid = "Grid"
 }
+
+struct Messages {
+    static let noDescription = "Sem descrição."
+}

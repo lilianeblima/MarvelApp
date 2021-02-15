@@ -121,7 +121,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <sections>
-                            <tableViewSection headerTitle="Section-1" id="aYR-eI-Rxw">
+                            <tableViewSection id="aYR-eI-Rxw">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="286" id="oF2-Iz-NNN">
                                         <rect key="frame" x="0.0" y="28" width="414" height="286"/>
@@ -154,24 +154,27 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="223" id="z5o-Dn-Qdu">
-                                        <rect key="frame" x="0.0" y="314" width="414" height="223"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="277" id="z5o-Dn-Qdu">
+                                        <rect key="frame" x="0.0" y="314" width="414" height="277"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="z5o-Dn-Qdu" id="Dw8-gx-Wcw">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="223"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="277"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cHW-Qc-j0c">
-                                                    <rect key="frame" x="20" y="21" width="71" height="21"/>
+                                                    <rect key="frame" x="20" y="21" width="71" height="25"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mEL-Nw-QZN">
-                                                    <rect key="frame" x="20" y="52" width="374" height="150"/>
+                                                    <rect key="frame" x="20" y="56" width="374" height="200"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="150" id="xD2-I9-aco"/>
+                                                        <constraint firstAttribute="height" constant="200" id="xD2-I9-aco"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <segue destination="P72-w3-jaM" kind="embed" id="iYo-fr-nNS"/>
+                                                    </connections>
                                                 </containerView>
                                             </subviews>
                                             <constraints>
@@ -185,7 +188,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="223" id="Shi-Zu-tnd">
-                                        <rect key="frame" x="0.0" y="537" width="414" height="223"/>
+                                        <rect key="frame" x="0.0" y="591" width="414" height="223"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Shi-Zu-tnd" id="Twv-x5-rKw">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="223"/>
@@ -236,7 +239,7 @@
             <objects>
                 <collectionViewController id="P72-w3-jaM" customClass="ExtrasCollectionViewController" customModule="MarvelApp" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Gnv-BQ-D6h">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3aT-5q-XFQ">
@@ -297,7 +300,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M2h-Eb-b3W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1709" y="84"/>
+            <point key="canvasLocation" x="1680" y="366"/>
         </scene>
     </scenes>
     <resources>

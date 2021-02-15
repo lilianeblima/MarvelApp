@@ -8,15 +8,30 @@
 import UIKit
 
 
-class ExtrasCollectionViewController: UICollectionViewController {
+protocol ExtrasUpdate {
+    var character: Character? { get set }
+    func update(character: Character?)
+}
 
+class ExtrasCollectionViewController: UICollectionViewController, ExtrasUpdate {
+    func update(character: Character?) {
+        self.character = character
+        collectionView.reloadData()
+    }
+    
+    var character: Character?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Register cell classes
         self.collectionView.register(AlertCell.self)
         self.collectionView.register(CharacterCell.self)
-        self.collectionView.collectionViewLayout =  CustomFlowLayout(custom: .grid)
+        self.collectionView.collectionViewLayout =  CustomFlowLayout(custom: .grid, direction: .horizontal, height: 190)
+//        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+//              flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+//        }
+        
 
     }
 
@@ -28,15 +43,16 @@ class ExtrasCollectionViewController: UICollectionViewController {
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return character?.comics?.count ?? 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        guard let cell: CharacterCell = collectionView.dequeueReusableCell(for: indexPath), let item = character?.comics?[indexPath.row] else {
+            return UICollectionViewCell()
+        }
+        cell.configureExtras(item: item)
     
-        // Configure the cell
-    
-        return UICollectionViewCell()
+        return cell
     }
 
     // MARK: UICollectionViewDelegate

@@ -29,6 +29,7 @@ class CharacterCell: UICollectionViewCell, NibReusable {
     }
     
     func configure(character: Character) {
+        
         currentCharacter = character
         configureCell(name: character.name, isFavorite: character.isFavorite, imageString: character.imagePath, image: nil)
     }
@@ -38,6 +39,22 @@ class CharacterCell: UICollectionViewCell, NibReusable {
         let image = UIImage(data: character.image as Data? ?? Data())
         configureCell(name: character.name, isFavorite: true, imageString: String(), image: image)
     }
+    
+    func configureExtras(item: ExtraPlus) {
+        setupAutomaticScaleLabel()
+        favoriteImage.isHidden = true
+        favoriteButton.isEnabled = false
+        nameLabel.text = item.title
+        if let url = URL(string: "\(item.thumbnail.path).\(item.thumbnail.extension)") {
+            imageCharacter.kf.setImage(with: url)
+        }
+    }
+    
+    private func setupAutomaticScaleLabel() {
+        nameLabel.minimumScaleFactor = 10/UIFont.labelFontSize
+        nameLabel.adjustsFontSizeToFitWidth = true
+    }
+    
     
     private func configureCell(name: String, isFavorite: Bool, imageString: String, image: UIImage?) {
         nameLabel.text = name

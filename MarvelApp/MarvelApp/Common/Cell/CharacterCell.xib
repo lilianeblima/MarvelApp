@@ -17,8 +17,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="238" height="253"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERQ-EZ-Fyg">
-                        <rect key="frame" x="10" y="222" width="188" height="16"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERQ-EZ-Fyg">
+                        <rect key="frame" x="10" y="125" width="188" height="113"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="113" id="qEc-V2-skx"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -31,14 +34,14 @@
                         </constraints>
                     </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XkL-4s-fE0">
-                        <rect key="frame" x="208" y="220" width="20" height="20"/>
+                        <rect key="frame" x="208" y="171.5" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="XkL-4s-fE0" secondAttribute="height" multiplier="1:1" id="1aj-19-xhP"/>
                             <constraint firstAttribute="height" constant="20" id="dbI-Dp-lRD"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WgQ-K0-p1A">
-                        <rect key="frame" x="198" y="210" width="40" height="40"/>
+                        <rect key="frame" x="198" y="161.5" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="WgQ-K0-p1A" secondAttribute="height" multiplier="1:1" id="HPJ-gV-aBX"/>
                             <constraint firstAttribute="width" constant="40" id="rfS-X7-cYa"/>
@@ -59,6 +62,7 @@
                 <constraint firstItem="XkL-4s-fE0" firstAttribute="trailing" secondItem="UXe-x1-byx" secondAttribute="trailing" id="Aw6-VW-xxu"/>
                 <constraint firstItem="ERQ-EZ-Fyg" firstAttribute="leading" secondItem="UXe-x1-byx" secondAttribute="leading" id="MPf-qK-pru"/>
                 <constraint firstItem="UXe-x1-byx" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="QbO-Qd-zMC"/>
+                <constraint firstItem="ERQ-EZ-Fyg" firstAttribute="top" secondItem="UXe-x1-byx" secondAttribute="bottom" constant="10" id="Qrd-B7-p56"/>
                 <constraint firstAttribute="bottom" secondItem="ERQ-EZ-Fyg" secondAttribute="bottom" constant="15" id="qt3-vW-hoj"/>
                 <constraint firstItem="XkL-4s-fE0" firstAttribute="leading" secondItem="ERQ-EZ-Fyg" secondAttribute="trailing" constant="10" id="w1j-06-D4c"/>
                 <constraint firstItem="UXe-x1-byx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="xLr-6e-iJt"/>

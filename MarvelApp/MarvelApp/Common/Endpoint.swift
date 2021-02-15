@@ -43,6 +43,7 @@ private struct RequestConfig {
 
 enum RequestEndpoint {
     case characters(customQuery: [String: String]?)
+    case character(characterId: String, extra: String)
 }
 
 extension RequestEndpoint: Endpoint {
@@ -54,6 +55,8 @@ extension RequestEndpoint: Endpoint {
                 currentQuery.merge(customQuery)
             }
             return currentQuery
+        case .character(_, _):
+            return [:]
         }
     }
     
@@ -61,6 +64,8 @@ extension RequestEndpoint: Endpoint {
         switch self {
         case .characters(_):
             return "/v1/public/characters"
+        case .character(let characterId, let extra):
+            return "/v1/public/characters/\(characterId)/\(extra)"
         }
     }
 }

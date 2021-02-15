@@ -25,6 +25,8 @@ class ListCharactersViewController: UIViewController {
         collectionView.collectionViewLayout = CustomFlowLayout(custom: .grid)
         collectionView.addSubview(refreshControl)
         self.presenter?.getInitialCharacters()
+        let list = ListCharactersInteractor()
+//        list.teste()
     }
     
     override func viewWillAppear(_ animated: Bool) {

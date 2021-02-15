@@ -13,20 +13,31 @@ protocol ViewToPresenterDetailCharacterProtocol: class {
     var interactor: PresenterToInteracatorDetailCharacterProtocol?  { get set }
     
     func fillDescription() -> String
-    func fillImage() -> UIImage
+    func fillImage()
+    func navigationTitle() -> String
+    func getCurrentCharacter() -> Character?
+    func getCommicsImage()
 }
 
 protocol PresenterToInteracatorDetailCharacterProtocol: class {
     var presenter: InteractorToPresenterDetailCharacterProtocol? { get set }
     var character: Character? { get set }
+    
+    func fillDescription() -> String
+    func fillImage()
+    func getCommicsImage()
 }
 
 protocol InteractorToPresenterDetailCharacterProtocol: class {
-    
+    func updateWithImage(image: UIImage)
+    func updateWithStringImage(stringImage: URL)
+    func updateWithCommicImages()
 }
 
 protocol PresenterToViewDetailCharacterProtocol: class {
-    
+    func updateWithImage(image: UIImage)
+    func updateWithStringImage(stringImage: URL)
+    func updateWithCommicImages()
 }
 
 protocol PresenterToRouterDetailProtocol: class {
