@@ -25,7 +25,6 @@
         <!--Main Tab Bar Controller-->
         <scene sceneID="hYf-iO-4ax">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ms1-Uw-vyt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController id="mn2-3K-Euc" customClass="MainTabBarController" customModule="MarvelApp" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Sbz-Ed-HkS"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iuQ-ht-ohn">
@@ -34,6 +33,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ms1-Uw-vyt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-590" y="1320"/>
         </scene>

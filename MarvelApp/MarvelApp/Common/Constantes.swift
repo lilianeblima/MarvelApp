@@ -26,3 +26,8 @@ struct AlertMessage {
     static let title = "Ops"
     static let ok = "OK"
 }
+
+struct Buttons {
+    static let list = "Lista"
+    static let grid = "Grid"
+}

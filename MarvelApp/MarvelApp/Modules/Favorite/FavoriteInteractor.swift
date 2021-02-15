@@ -40,7 +40,6 @@ class FavoriteInteractor: PresenterToInteracatorFavoriteProtocol {
             } else {
                 presenter?.showAlert(withTitle: AlertMessage.title, andMessage: AlertMessage.defaultMessage)
             }
-            
         }
     }
 }

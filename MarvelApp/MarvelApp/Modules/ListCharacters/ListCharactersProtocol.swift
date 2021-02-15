@@ -17,6 +17,8 @@ protocol ViewToPresenterListCharactersProtocol: class {
     func isNeedUpdateCharacters()
     func getCustomLayout() -> (title: String, customLayout: CustomLayout)?
     func updateFavoriteCharacter(isFavorite: Bool, character: FavoriteCharacter?)
+    func checkFavoriteUpdate()
+    func getTitleGridButton() -> String
 }
 
 protocol PresenterToViewListCharactersProtocol: class {
@@ -34,6 +36,8 @@ protocol PresenterToInteractorListCharactersProtocol: class {
     func getCustomLayout() -> (title: String, customLayout: CustomLayout)
     var result: Result? { get }
     func updateFavoriteCharacter(isFavorite: Bool, character: FavoriteCharacter?)
+    func checkFavoriteUpdate()
+    func getTitleGridButton() -> String
 }
 
 protocol InteractorToPresenterListCharactersProtocol: class {

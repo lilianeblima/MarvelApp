@@ -30,9 +30,9 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
                     self.result = decoder
                     self.updateFavorite()
                     self.presenter?.successResponse()
-                } catch let error {
+                } catch {
                     // Tratamento de erro
-                    self.presenter?.getCharactersFail(errorMessage: "Errouu - Detalhes: \(error)")
+                    self.presenter?.getCharactersFail(errorMessage: AlertMessage.defaultMessage)
                 }
             } else {
                 // Tratamento de erro
@@ -63,7 +63,7 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
                     self.presenter?.successResponse()
                 } catch let error {
                     // Tratamento de erro
-                    self.presenter?.getCharactersFail(errorMessage: "Errouu - Detalhes: \(error)")
+                    self.presenter?.getCharactersFail(errorMessage: AlertMessage.defaultMessage)
                 }
             } else {
                 
@@ -92,16 +92,16 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
     
     func getCustomLayout() -> (title: String, customLayout: CustomLayout) {
         var customLayout = CustomLayout.grid
-        var buttonTitle = "Lista"
+        var buttonTitle = Buttons.list
         if currentLayoutCollection == .grid {
             customLayout = CustomLayout.list
-            buttonTitle = "Grid"
+            buttonTitle = Buttons.grid
         }
         currentLayoutCollection = customLayout
         return(buttonTitle, customLayout)
     }
     
-    // MARK: - FAvorite Action
+    // MARK: - Favorite Action
     func updateFavoriteCharacter(isFavorite: Bool, character: FavoriteCharacter?) {
         selectedActionFavorite(withCharacter: character, isFavorite: isFavorite) { success, errorMessage  in
             if success, let index = self.result?.data.allCharacters.firstIndex(where: { $0.id == character?.id }) {
@@ -120,7 +120,7 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
         } else if isFavorite, let favoriteCharacter = withCharacter {
             saveNewCharacterFavorite(withCharacter: favoriteCharacter, completion: completion)
         } else {
-            completion(false, "Erro ao converter objeto")
+            completion(false, AlertMessage.defaultMessage)
         }
     }
     
@@ -130,5 +130,12 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
     
     func removeCharacterFavorite(withId id: Int, completion: CompletionHandler) {
         database.remove(favoriteId: id, completion: completion)
+    }
+    
+    func checkFavoriteUpdate() {
+    }
+    
+    func getTitleGridButton() -> String {
+        return currentLayoutCollection == .grid ? Buttons.list : Buttons.grid
     }
 }

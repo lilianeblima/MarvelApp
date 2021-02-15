@@ -17,12 +17,14 @@ class FavoriteViewController: UIViewController {
         super.viewDidLoad()
         collectionView.register(AlertCell.self)
         collectionView.register(CharacterCell.self)
-        self.navigationController?.navigationBar.topItem?.title = Titles.favorite
         collectionView.collectionViewLayout = presenter?.getCustomLayout() ?? CustomFlowLayout(custom: .grid)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.topItem?.title = Titles.favorite
+        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
         presenter?.refresh()
     }
 }

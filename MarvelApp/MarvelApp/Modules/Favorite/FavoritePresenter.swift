@@ -48,5 +48,4 @@ extension FavoritePresenter: InteractorToPresenterFavoriteProtocol {
     func refreshData() {
         view?.refresh()
     }
-    
 }

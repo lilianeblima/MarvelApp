@@ -25,17 +25,22 @@ class ListCharactersViewController: UIViewController {
         collectionView.collectionViewLayout = CustomFlowLayout(custom: .grid)
         collectionView.addSubview(refreshControl)
         self.presenter?.getInitialCharacters()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter?.checkFavoriteUpdate()
         self.navigationController?.navigationBar.topItem?.title = Titles.characters
+        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: presenter?.getTitleGridButton(), style: .done, target: self, action: #selector(changeListStyleAction))
     }
     
     @objc func refreshAction() {
         presenter?.isNeedUpdateCharacters()
     }
     
-    @IBAction func changeListStyleAction(_ sender: UIBarButtonItem) {        
+    @objc func changeListStyleAction() {
         guard let customLayout = presenter?.getCustomLayout() else { return }
-        
-        rightButtonItem.title = customLayout.title
+        self.navigationController?.navigationBar.topItem?.rightBarButtonItem?.title = customLayout.title
         UIView.animate(withDuration: 0.2) { () -> Void in
             self.collectionView.collectionViewLayout.invalidateLayout()
             self.collectionView.setCollectionViewLayout(CustomFlowLayout(custom: customLayout.customLayout), animated: true)
@@ -71,7 +76,6 @@ extension ListCharactersViewController: PresenterToViewListCharactersProtocol {
         self.collectionView.reloadData()
         collectionView.refreshControl?.endRefreshing()
         refreshControl.endRefreshing()
-        
     }
     
     func getCharactersFail(errorMessage: String) {
