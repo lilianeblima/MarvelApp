@@ -22,13 +22,24 @@ class DetailCharacterTableViewController: UITableViewController {
         presenter?.getSeriesAndComics()
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 300.0
-        self.navigationController?.navigationBar.topItem?.title = presenter?.navigationTitle()
+        
+        self.navigationController?.navigationBar.topItem?.backButtonTitle = String()
+        self.navigationItem.title = presenter?.navigationTitle()
+        updateFavoritButton()
 
+    }
+    
+    @objc func favoriteCharacter() {
+        presenter?.updateFavoriteCharacter()
     }
     
     private func fill() {
         descriptionLabel.text = presenter?.fillDescription()
         presenter?.fillImage()
+    }
+    
+    private func updateFavoritButton() {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: presenter?.getImageNameToFavoriteIcon() ?? String()), style: .done, target: self, action: #selector(favoriteCharacter))
     }
 
     // MARK: - Table view data source
@@ -59,6 +70,7 @@ class DetailCharacterTableViewController: UITableViewController {
 }
 
 extension DetailCharacterTableViewController: PresenterToViewDetailCharacterProtocol {
+    
     func updateWithImage(image: UIImage) {
         characterImage.image = image
     }
@@ -73,6 +85,16 @@ extension DetailCharacterTableViewController: PresenterToViewDetailCharacterProt
     
     func updateSeries(action: ActionCell, customLayout: CustomFlowLayout) {
         delegateSeries?.update(character: presenter?.getCurrentCharacter(), action: action, customLayout: customLayout)
+    }
+    
+    func updateFavoriteIcon() {
+        updateFavoritButton()
+    }
+    
+    func showAlertError(message: String) {
+        let alert = UIAlertController(title: AlertMessage.title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: AlertMessage.ok, style: .default))
+        self.present(alert, animated: true)
     }
 }
 

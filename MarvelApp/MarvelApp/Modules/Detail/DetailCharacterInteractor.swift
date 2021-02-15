@@ -12,7 +12,7 @@ class DetailCharacterInteractor: PresenterToInteracatorDetailCharacterProtocol {
     
     weak var presenter: InteractorToPresenterDetailCharacterProtocol?
     var character: Character?
-    // var result: ResultExtras?
+    let database = Database()
     
     func fillDescription() -> String {
         if let description = character?.description, description.isEmpty {
@@ -33,12 +33,11 @@ class DetailCharacterInteractor: PresenterToInteracatorDetailCharacterProtocol {
         getComics()
         getSeries()
     }
-    
+        
     func getComics() {
         getExtras(url: RequestEndpoint.character(characterId: String(character?.id ?? 0), extra: "comics").url) { response in
             switch response {
             case .success(let result):
-                // self.result = result
                 self.character?.comics = result.data.results
                 let action = self.action(message: String(), extras: result.data.results)
                 self.presenter?.updateComics(action: action.action, customLayout: action.customLayout)
@@ -54,7 +53,6 @@ class DetailCharacterInteractor: PresenterToInteracatorDetailCharacterProtocol {
         getExtras(url: RequestEndpoint.character(characterId: String(character?.id ?? 0), extra: "series").url) { response in
             switch response {
             case .success(let result):
-                //.result = result
                 self.character?.series = result.data.results
                 let action = self.action(message: String(), extras: result.data.results)
                 self.presenter?.updateSeries(action: action.action, customLayout: action.customLayout)
@@ -78,4 +76,31 @@ class DetailCharacterInteractor: PresenterToInteracatorDetailCharacterProtocol {
         }
         return CustomLayoutCell(action: .errorMessage(message: message), customLayout: CustomFlowLayout(custom: .list, direction: .horizontal, height: 150))
     }
+    
+    func getImageNameToFavoriteIcon() -> String {
+        return database.contains(withId: character?.id ?? 0) ? ImageNames.favoriteTabbarSelected : ImageNames.favoriteTabbar
+    }
+    
+    func updateFavoriteCharacter() {
+        if database.contains(withId: character?.id ?? 0) {
+            database.remove(favoriteId: character?.id ?? 0) { success, _ in
+                if success {
+                    self.presenter?.updateFavoriteIcon()
+                } else {
+                    self.presenter?.showAlertError(message: AlertMessage.saveFavorite)
+                }
+            }
+        } else if let favorite = character?.convertToFavorite() {
+            database.save(favoriteCharacter: favorite) { success, _ in
+                if success {
+                    self.presenter?.updateFavoriteIcon()
+                } else {
+                    self.presenter?.showAlertError(message: AlertMessage.saveFavorite)
+                }
+            }
+        } else {
+            self.presenter?.showAlertError(message: AlertMessage.defaultMessage)
+        }
+    }
+    
 }

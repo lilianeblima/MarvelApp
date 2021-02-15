@@ -17,6 +17,9 @@ protocol ViewToPresenterDetailCharacterProtocol: class {
     func navigationTitle() -> String
     func getCurrentCharacter() -> Character?
     func getSeriesAndComics()
+    
+    func getImageNameToFavoriteIcon() -> String
+    func updateFavoriteCharacter()
 }
 
 protocol PresenterToInteracatorDetailCharacterProtocol: class {
@@ -26,6 +29,8 @@ protocol PresenterToInteracatorDetailCharacterProtocol: class {
     func fillDescription() -> String
     func fillImage()
     func getSeriesAndComics()
+    func getImageNameToFavoriteIcon() -> String
+    func updateFavoriteCharacter()
 }
 
 protocol InteractorToPresenterDetailCharacterProtocol: class {
@@ -33,6 +38,8 @@ protocol InteractorToPresenterDetailCharacterProtocol: class {
     func updateWithStringImage(stringImage: URL)
     func updateComics(action: ActionCell, customLayout: CustomFlowLayout)
     func updateSeries(action: ActionCell, customLayout: CustomFlowLayout)
+    func updateFavoriteIcon()
+    func showAlertError(message: String)
 }
 
 protocol PresenterToViewDetailCharacterProtocol: class {
@@ -40,6 +47,8 @@ protocol PresenterToViewDetailCharacterProtocol: class {
     func updateWithStringImage(stringImage: URL)
     func updateComics(action: ActionCell, customLayout: CustomFlowLayout)
     func updateSeries(action: ActionCell, customLayout: CustomFlowLayout)
+    func updateFavoriteIcon()
+    func showAlertError(message: String)
 }
 
 protocol PresenterToRouterDetailProtocol: class {

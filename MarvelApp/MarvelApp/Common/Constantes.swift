@@ -19,12 +19,16 @@ struct ImageNames {
     static let charactersTabbarSelected = "tabbarCharactersSelected"
     static let noFavoriteIcon = "NoFavorite"
     static let favoriteIcon = "Favorite"
+    static let sadIcon = "sadIcon"
 }
 
 struct AlertMessage {
     static let defaultMessage = "Tivemos um problema, tente novamente mais tarde"
     static let title = "Ops"
     static let ok = "OK"
+    static let emptyFavorite = "Ops! Você ainda não tem nenhum personagem favorito"
+    static let saveFavorite = "Falha ao favoritar o personagem. Por favor tente novamente!"
+    static let removeFavorite = "Falha ao tentar remver o personagem dos favoritos. Por favor tente novamente!"
 }
 
 struct Buttons {

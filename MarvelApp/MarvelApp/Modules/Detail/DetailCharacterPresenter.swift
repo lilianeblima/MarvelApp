@@ -31,6 +31,16 @@ class DetailCharacterPresenter: ViewToPresenterDetailCharacterProtocol {
     func getSeriesAndComics() {
         interactor?.getSeriesAndComics()
     }
+    
+    func getImageNameToFavoriteIcon() -> String {
+        interactor?.getImageNameToFavoriteIcon() ?? String()
+    }
+    
+    func updateFavoriteCharacter() {
+        interactor?.updateFavoriteCharacter()
+    }
+    
+    
 }
 
 extension DetailCharacterPresenter: InteractorToPresenterDetailCharacterProtocol {
@@ -49,4 +59,13 @@ extension DetailCharacterPresenter: InteractorToPresenterDetailCharacterProtocol
     func updateSeries(action: ActionCell, customLayout: CustomFlowLayout) {
         view?.updateSeries(action: action, customLayout: customLayout)
     }
+    
+    func updateFavoriteIcon() {
+        view?.updateFavoriteIcon()
+    }
+    
+    func showAlertError(message: String) {
+        view?.showAlertError(message: message)
+    }
+    
 }

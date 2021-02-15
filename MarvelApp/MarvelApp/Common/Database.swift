@@ -52,6 +52,18 @@ class Database {
         }
     }
     
+    func contains(withId id: Int) -> Bool {
+        do {
+            let realm = try Realm()
+            guard realm.objects(FavoriteCharacter.self).filter("id==\(id)").first != nil else {
+                return false
+            }
+            return true
+        } catch {
+            return false
+        }
+    }
+    
     func clear() {
         do {
             let realm = try Realm()

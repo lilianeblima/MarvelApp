@@ -229,6 +229,7 @@
                             <outlet property="delegate" destination="LsX-pi-Kck" id="FTY-aP-mPb"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="Rk3-E6-zop"/>
                     <connections>
                         <outlet property="characterImage" destination="vEo-uD-Vql" id="YfW-4V-YIe"/>
                         <outlet property="descriptionLabel" destination="tMP-2B-U6U" id="nmr-b5-MdB"/>
