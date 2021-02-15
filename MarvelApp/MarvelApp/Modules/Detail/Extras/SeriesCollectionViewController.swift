@@ -1,5 +1,5 @@
 //
-//  ExtrasCollectionViewController.swift
+//  SeriesCollectionViewController.swift
 //  MarvelApp
 //
 //  Created by Liliane Bezerra Lima on 15/02/21.
@@ -7,18 +7,11 @@
 
 import UIKit
 
-
-protocol ComicsUpdate {
+protocol SeriesUpdate {
     func update(character: Character?, action: ActionCell, customLayout: CustomFlowLayout)
 }
 
-enum ActionCell {
-    case showResult
-    case loading
-    case errorMessage(message: String)
-}
-
-class ExtrasCollectionViewController: UICollectionViewController, ComicsUpdate {
+class SeriesCollectionViewController: UICollectionViewController, SeriesUpdate {
     func update(character: Character?, action: ActionCell, customLayout: CustomFlowLayout) {
         self.character = character
         self.action = action
@@ -26,6 +19,7 @@ class ExtrasCollectionViewController: UICollectionViewController, ComicsUpdate {
         collectionView.reloadData()
     }
     
+
     var character: Character?
     var action: ActionCell = .loading
     var isLoading: Bool {
@@ -34,8 +28,6 @@ class ExtrasCollectionViewController: UICollectionViewController, ComicsUpdate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Register cell classes
         self.collectionView.register(AlertCell.self)
         self.collectionView.register(CharacterCell.self)
         self.collectionView.register(LoadingCell.self)
@@ -50,10 +42,10 @@ class ExtrasCollectionViewController: UICollectionViewController, ComicsUpdate {
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let count = character?.comics?.count, count == 0 {
+        if let count = character?.series?.count, count == 0 {
             return 1
         }
-        return character?.comics?.count ?? 1
+        return character?.series?.count ?? 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -68,28 +60,11 @@ class ExtrasCollectionViewController: UICollectionViewController, ComicsUpdate {
     }
     
     private func fillCellResult(indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell: CharacterCell = collectionView.dequeueReusableCell(for: indexPath), let item = character?.comics?[indexPath.row] else {
+        guard let cell: CharacterCell = collectionView.dequeueReusableCell(for: indexPath), let item = character?.series?[indexPath.row] else {
             return UICollectionViewCell()
         }
         cell.configureExtras(item: item)
         return cell
     }
-}
 
-extension UICollectionView {
-    func fillCellError(withMessage message: String, indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell: AlertCell = self.dequeueReusableCell(for: indexPath) else {
-            return UICollectionViewCell()
-        }
-        cell.configure(withMessage: message)
-        return cell
-    }
-    
-    func fillCellLoading(indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell: LoadingCell = self.dequeueReusableCell(for: indexPath) else {
-            return UICollectionViewCell()
-        }
-        cell.start()
-        return cell
-    }
 }

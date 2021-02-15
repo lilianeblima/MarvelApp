@@ -32,13 +32,14 @@
 		113B236525D9BF64000BE587 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B236425D9BF64000BE587 /* MainTabBarController.swift */; };
 		113B237525D9CCCF000BE587 /* Constantes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B237425D9CCCF000BE587 /* Constantes.swift */; };
 		116BACCE25DAFD4B00CDB67A /* CustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116BACCD25DAFD4B00CDB67A /* CustomLayout.swift */; };
+		116BACD325DB097500CDB67A /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116BACD225DB097500CDB67A /* Endpoint.swift */; };
+		116BACDB25DB0F1000CDB67A /* SeriesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116BACDA25DB0F1000CDB67A /* SeriesCollectionViewController.swift */; };
 		118B4D4525DAC0D0009939BB /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118B4D4325DAC0D0009939BB /* LoadingCell.swift */; };
 		118B4D4625DAC0D0009939BB /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 118B4D4425DAC0D0009939BB /* LoadingCell.xib */; };
 		118B4D5D25DAF010009939BB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118B4D5C25DAF010009939BB /* NetworkManager.swift */; };
 		11FCA6D725D75B8800BDD6E2 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FCA6D625D75B8800BDD6E2 /* Character.swift */; };
 		11FCA70425D76B4400BDD6E2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FCA70325D76B4400BDD6E2 /* Result.swift */; };
 		11FCA70A25D76BBD00BDD6E2 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FCA70925D76BBD00BDD6E2 /* StringExtension.swift */; };
-		11FCA73325D76F4A00BDD6E2 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FCA73225D76F4A00BDD6E2 /* Endpoint.swift */; };
 		11FCA74225D7817700BDD6E2 /* ListCharactersProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FCA74125D7817700BDD6E2 /* ListCharactersProtocol.swift */; };
 		11FCA74F25D7856300BDD6E2 /* ListCharactersRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FCA74E25D7856300BDD6E2 /* ListCharactersRouter.swift */; };
 		11FF3A5D25D737B900C4DBE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FF3A5C25D737B900C4DBE5 /* AppDelegate.swift */; };
@@ -99,13 +100,14 @@
 		113B237425D9CCCF000BE587 /* Constantes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constantes.swift; sourceTree = "<group>"; };
 		11532AE14AE6CEE1AE1CFF35 /* Pods_MarvelApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MarvelApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		116BACCD25DAFD4B00CDB67A /* CustomLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLayout.swift; sourceTree = "<group>"; };
+		116BACD225DB097500CDB67A /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Endpoint.swift; path = MarvelApp/Common/Endpoint.swift; sourceTree = SOURCE_ROOT; };
+		116BACDA25DB0F1000CDB67A /* SeriesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesCollectionViewController.swift; sourceTree = "<group>"; };
 		118B4D4325DAC0D0009939BB /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		118B4D4425DAC0D0009939BB /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 		118B4D5C25DAF010009939BB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		11FCA6D625D75B8800BDD6E2 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		11FCA70325D76B4400BDD6E2 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		11FCA70925D76BBD00BDD6E2 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
-		11FCA73225D76F4A00BDD6E2 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		11FCA74125D7817700BDD6E2 /* ListCharactersProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCharactersProtocol.swift; sourceTree = "<group>"; };
 		11FCA74E25D7856300BDD6E2 /* ListCharactersRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCharactersRouter.swift; sourceTree = "<group>"; };
 		11FF3A5925D737B900C4DBE5 /* MarvelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				1133239B25DA1E6A00783BDE /* ExtrasCollectionViewController.swift */,
+				116BACDA25DB0F1000CDB67A /* SeriesCollectionViewController.swift */,
 			);
 			path = Extras;
 			sourceTree = "<group>";
@@ -200,7 +203,7 @@
 		118B4D6125DAF7FA009939BB /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				11FCA73225D76F4A00BDD6E2 /* Endpoint.swift */,
+				116BACD225DB097500CDB67A /* Endpoint.swift */,
 				118B4D5C25DAF010009939BB /* NetworkManager.swift */,
 			);
 			path = Network;
@@ -540,16 +543,17 @@
 				113B235025D9A73A000BE587 /* CharacterCell.swift in Sources */,
 				1133239C25DA1E6A00783BDE /* ExtrasCollectionViewController.swift in Sources */,
 				113323AB25DA205200783BDE /* DetailCharacterRouter.swift in Sources */,
+				116BACD325DB097500CDB67A /* Endpoint.swift in Sources */,
 				113B237525D9CCCF000BE587 /* Constantes.swift in Sources */,
 				118B4D5D25DAF010009939BB /* NetworkManager.swift in Sources */,
 				11FCA74225D7817700BDD6E2 /* ListCharactersProtocol.swift in Sources */,
 				11FF3AAF25D7483100C4DBE5 /* ListCharactersViewController.swift in Sources */,
 				11FCA6D725D75B8800BDD6E2 /* Character.swift in Sources */,
 				1103B75025D8F443002C718A /* FavoriteCharacter.swift in Sources */,
+				116BACDB25DB0F1000CDB67A /* SeriesCollectionViewController.swift in Sources */,
 				1103B76C25D99A07002C718A /* FavoritePresenter.swift in Sources */,
 				1103B72E25D857D3002C718A /* CustomFlowLayout.swift in Sources */,
 				1103B77125D99A14002C718A /* FavoriteInteractor.swift in Sources */,
-				11FCA73325D76F4A00BDD6E2 /* Endpoint.swift in Sources */,
 				11FF3A5D25D737B900C4DBE5 /* AppDelegate.swift in Sources */,
 				113B235B25D9AB8B000BE587 /* NibReusable.swift in Sources */,
 				113323BB25DA362800783BDE /* Extras.swift in Sources */,

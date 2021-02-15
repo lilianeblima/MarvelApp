@@ -14,6 +14,7 @@ struct Character: Codable {
     let description: String?
     var image: UIImage?
     var comics: [ExtraPlus]?
+    var series: [ExtraPlus]?
     
     var imagePath: String {
         return "\(imageObject.path).\(imageObject.extension)"

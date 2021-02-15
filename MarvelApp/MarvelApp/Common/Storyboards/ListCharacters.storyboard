@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Gh6-jv-Pm8">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -190,21 +191,24 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="223" id="Shi-Zu-tnd">
                                         <rect key="frame" x="0.0" y="591" width="414" height="223"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Shi-Zu-tnd" id="Twv-x5-rKw">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Shi-Zu-tnd" id="Twv-x5-rKw">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="223"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Series" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7RG-wD-Bpz">
-                                                    <rect key="frame" x="20" y="21" width="47.5" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="20" y="21" width="59.5" height="24"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ctM-I8-ssb">
-                                                    <rect key="frame" x="20" y="52" width="374" height="150"/>
+                                                    <rect key="frame" x="20" y="55" width="374" height="190"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="150" id="XUG-EJ-NF7"/>
+                                                        <constraint firstAttribute="height" constant="190" id="XUG-EJ-NF7"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <segue destination="D8y-zM-1ag" kind="embed" id="dsV-zG-ec6"/>
+                                                    </connections>
                                                 </containerView>
                                             </subviews>
                                             <constraints>
@@ -268,12 +272,12 @@
             </objects>
             <point key="canvasLocation" x="1710" y="-92"/>
         </scene>
-        <!--Collection View Controller-->
+        <!--Series Collection View Controller-->
         <scene sceneID="i3H-Hj-RbN">
             <objects>
-                <collectionViewController id="D8y-zM-1ag" sceneMemberID="viewController">
+                <collectionViewController id="D8y-zM-1ag" customClass="SeriesCollectionViewController" customModule="MarvelApp" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="3yy-YM-EVf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="190"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7ur-hd-iLt">
@@ -300,7 +304,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M2h-Eb-b3W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1680" y="366"/>
+            <point key="canvasLocation" x="887" y="417"/>
         </scene>
     </scenes>
     <resources>

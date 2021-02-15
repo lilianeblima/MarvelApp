@@ -12,7 +12,7 @@ class DetailCharacterInteractor: PresenterToInteracatorDetailCharacterProtocol {
     
     weak var presenter: InteractorToPresenterDetailCharacterProtocol?
     var character: Character?
-    var result: ResultExtras?
+    // var result: ResultExtras?
     
     func fillDescription() -> String {
         if let description = character?.description, description.isEmpty {
@@ -29,34 +29,53 @@ class DetailCharacterInteractor: PresenterToInteracatorDetailCharacterProtocol {
         }
     }
     
-    func getCommicsImage() {
-        
-        if !(character?.comics?.isEmpty ?? false), let url = RequestEndpoint.character(characterId: String(character?.id ?? 0), extra: "comics").url {
-            Alamofire.request(url).response { response in
-                if let data = response.data {
-                    do {
-                        let decoder = try JSONDecoder().decode(ResultExtras.self, from: data)
-                        self.result = decoder
-                        self.character?.comics = decoder.data.results
-                        print(decoder)
-                        self.presenter?.updateWithCommicImages(action: self.action().action, customLayout: self.action().layout)
-                    } catch let error {
-                        print(error)
-                        // Tratamento de erro
-                    }
-                } else {
-                    // Tratamento de erro
-                }
+    func getSeriesAndComics() {
+        getComics()
+        getSeries()
+    }
+    
+    func getComics() {
+        getExtras(url: RequestEndpoint.character(characterId: String(character?.id ?? 0), extra: "comics").url) { response in
+            switch response {
+            case .success(let result):
+                // self.result = result
+                self.character?.comics = result.data.results
+                let action = self.action(message: String(), extras: result.data.results)
+                self.presenter?.updateComics(action: action.action, customLayout: action.customLayout)
+            case .error(let error):
+                let customError = error as? ErrorResponse
+                let action = self.action(message: customError?.localizedDescription ?? ErrorMessage.defaultMessage, extras: nil)
+                self.presenter?.updateComics(action: action.action, customLayout: action.customLayout)
             }
         }
     }
     
-    func action() -> (action: ActionCell, layout: CustomFlowLayout) {
-        if let commics = character?.comics, !commics.isEmpty {
-            return (action: .showResult, layout: CustomFlowLayout(custom: .grid, direction: .horizontal, height: 190))
-        } else if let commics = character?.comics, !commics.isEmpty {
-            return (action: .errorMessage(message: "Não tem commics"), layout: CustomFlowLayout(custom: .list, direction: .horizontal, height: 190))
+    func getSeries() {
+        getExtras(url: RequestEndpoint.character(characterId: String(character?.id ?? 0), extra: "series").url) { response in
+            switch response {
+            case .success(let result):
+                //.result = result
+                self.character?.series = result.data.results
+                let action = self.action(message: String(), extras: result.data.results)
+                self.presenter?.updateSeries(action: action.action, customLayout: action.customLayout)
+            case .error(let error):
+                let customError = error as? ErrorResponse
+                let action = self.action(message: customError?.localizedDescription ?? ErrorMessage.defaultMessage, extras: nil)
+                self.presenter?.updateSeries(action: action.action, customLayout: action.customLayout)
+            }
         }
-        return (action: .errorMessage(message: "Ops"), layout: CustomFlowLayout(custom: .list, direction: .horizontal, height: 150))
+    }
+    
+    func getExtras(url: URL?, completion: @escaping (Response<ResultExtras>) -> Void) {
+        NetworkManager.request(url: url, completion: completion)
+    }
+    
+    func action(message: String, extras: [ExtraPlus]?) -> CustomLayoutCell {
+        if let extras = extras, !extras.isEmpty {
+            return CustomLayoutCell(action: .showResult, customLayout: CustomFlowLayout(custom: .grid, direction: .horizontal, height: 190))
+        } else if let extras = extras, extras.isEmpty {
+            return CustomLayoutCell(action: .errorMessage(message: "Não possui"), customLayout: CustomFlowLayout(custom: .list, direction: .horizontal, height: 190))
+        }
+        return CustomLayoutCell(action: .errorMessage(message: message), customLayout: CustomFlowLayout(custom: .list, direction: .horizontal, height: 150))
     }
 }

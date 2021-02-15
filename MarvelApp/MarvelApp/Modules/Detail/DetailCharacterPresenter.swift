@@ -28,8 +28,8 @@ class DetailCharacterPresenter: ViewToPresenterDetailCharacterProtocol {
         interactor?.character
     }
     
-    func getCommicsImage() {
-        interactor?.getCommicsImage()
+    func getSeriesAndComics() {
+        interactor?.getSeriesAndComics()
     }
 }
 
@@ -42,8 +42,11 @@ extension DetailCharacterPresenter: InteractorToPresenterDetailCharacterProtocol
         view?.updateWithStringImage(stringImage: stringImage)
     }
     
-    func updateWithCommicImages(action: ActionCell, customLayout: CustomFlowLayout) {
-        view?.updateWithCommicImages(action: action, customLayout: customLayout)
+    func updateComics(action: ActionCell, customLayout: CustomFlowLayout) {
+        view?.updateComics(action: action, customLayout: customLayout)
     }
 
+    func updateSeries(action: ActionCell, customLayout: CustomFlowLayout) {
+        view?.updateSeries(action: action, customLayout: customLayout)
+    }
 }

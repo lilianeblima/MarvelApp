@@ -13,12 +13,13 @@ class DetailCharacterTableViewController: UITableViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     
     var presenter: ViewToPresenterDetailCharacterProtocol?
-    var delegateCollection: ExtrasUpdate?
+    var delegateComics: ComicsUpdate?
+    var delegateSeries: SeriesUpdate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         fill()
-        presenter?.getCommicsImage()
+        presenter?.getSeriesAndComics()
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 300.0
         self.navigationController?.navigationBar.topItem?.title = presenter?.navigationTitle()
@@ -49,7 +50,10 @@ class DetailCharacterTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? ExtrasCollectionViewController {
-            self.delegateCollection = destination
+            self.delegateComics = destination
+        }
+        if let destination = segue.destination as? SeriesCollectionViewController {
+            self.delegateSeries = destination
         }
     }
 }
@@ -63,9 +67,12 @@ extension DetailCharacterTableViewController: PresenterToViewDetailCharacterProt
         characterImage.kf.setImage(with: stringImage)
     }
     
-    func updateWithCommicImages(action: ActionCell, customLayout: CustomFlowLayout) {
-        delegateCollection?.update(character: presenter?.getCurrentCharacter(), action: action, customLayout: customLayout)
+    func updateComics(action: ActionCell, customLayout: CustomFlowLayout) {
+        delegateComics?.update(character: presenter?.getCurrentCharacter(), action: action, customLayout: customLayout)
     }
     
+    func updateSeries(action: ActionCell, customLayout: CustomFlowLayout) {
+        delegateSeries?.update(character: presenter?.getCurrentCharacter(), action: action, customLayout: customLayout)
+    }
 }
 

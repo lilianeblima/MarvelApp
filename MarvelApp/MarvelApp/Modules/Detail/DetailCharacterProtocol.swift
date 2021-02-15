@@ -16,7 +16,7 @@ protocol ViewToPresenterDetailCharacterProtocol: class {
     func fillImage()
     func navigationTitle() -> String
     func getCurrentCharacter() -> Character?
-    func getCommicsImage()
+    func getSeriesAndComics()
 }
 
 protocol PresenterToInteracatorDetailCharacterProtocol: class {
@@ -25,19 +25,21 @@ protocol PresenterToInteracatorDetailCharacterProtocol: class {
     
     func fillDescription() -> String
     func fillImage()
-    func getCommicsImage()
+    func getSeriesAndComics()
 }
 
 protocol InteractorToPresenterDetailCharacterProtocol: class {
     func updateWithImage(image: UIImage)
     func updateWithStringImage(stringImage: URL)
-    func updateWithCommicImages(action: ActionCell, customLayout: CustomFlowLayout)
+    func updateComics(action: ActionCell, customLayout: CustomFlowLayout)
+    func updateSeries(action: ActionCell, customLayout: CustomFlowLayout)
 }
 
 protocol PresenterToViewDetailCharacterProtocol: class {
     func updateWithImage(image: UIImage)
     func updateWithStringImage(stringImage: URL)
-    func updateWithCommicImages(action: ActionCell, customLayout: CustomFlowLayout)
+    func updateComics(action: ActionCell, customLayout: CustomFlowLayout)
+    func updateSeries(action: ActionCell, customLayout: CustomFlowLayout)
 }
 
 protocol PresenterToRouterDetailProtocol: class {
