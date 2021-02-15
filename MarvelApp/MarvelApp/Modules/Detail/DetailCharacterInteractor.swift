@@ -72,7 +72,7 @@ class DetailCharacterInteractor: PresenterToInteracatorDetailCharacterProtocol {
         if let extras = extras, !extras.isEmpty {
             return CustomLayoutCell(action: .showResult, customLayout: CustomFlowLayout(custom: .grid, direction: .horizontal, height: 190))
         } else if let extras = extras, extras.isEmpty {
-            return CustomLayoutCell(action: .errorMessage(message: "Não possui"), customLayout: CustomFlowLayout(custom: .list, direction: .horizontal, height: 190))
+            return CustomLayoutCell(action: .errorMessage(message: Messages.empty), customLayout: CustomFlowLayout(custom: .list, direction: .horizontal, height: 190))
         }
         return CustomLayoutCell(action: .errorMessage(message: message), customLayout: CustomFlowLayout(custom: .list, direction: .horizontal, height: 150))
     }
@@ -84,19 +84,10 @@ class DetailCharacterInteractor: PresenterToInteracatorDetailCharacterProtocol {
     func updateFavoriteCharacter() {
         if database.contains(withId: character?.id ?? 0) {
             database.remove(favoriteId: character?.id ?? 0) { success, _ in
-                if success {
-                    self.presenter?.updateFavoriteIcon()
-                } else {
-                    self.presenter?.showAlertError(message: AlertMessage.saveFavorite)
-                }
-            }
+                success ? self.presenter?.updateFavoriteIcon() : self.presenter?.showAlertError(message: AlertMessage.removeFavorite)            }
         } else if let favorite = character?.convertToFavorite() {
             database.save(favoriteCharacter: favorite) { success, _ in
-                if success {
-                    self.presenter?.updateFavoriteIcon()
-                } else {
-                    self.presenter?.showAlertError(message: AlertMessage.saveFavorite)
-                }
+                success ? self.presenter?.updateFavoriteIcon() : self.presenter?.showAlertError(message: AlertMessage.saveFavorite)
             }
         } else {
             self.presenter?.showAlertError(message: AlertMessage.defaultMessage)

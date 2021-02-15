@@ -38,6 +38,7 @@ struct Buttons {
 
 struct Messages {
     static let noDescription = "Sem descrição."
+    static let empty = "Não possui"
 }
 
 struct ErrorMessage {
