@@ -24,4 +24,10 @@ class ListCharactersRouter: PresenterToRouterListCharactersProtocol {
         return viewController
     }
     
+    func pushToCharacterDetail(on view: PresenterToViewListCharactersProtocol, with character: Character) {
+        let characterDetail = DetailCharacterRouter.createModule(withCharacter: character)
+        let viewController = view as? ListCharactersViewController
+        viewController?.navigationController?.pushViewController(characterDetail, animated: true)
+    }
+
 }

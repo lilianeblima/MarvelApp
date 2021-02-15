@@ -17,6 +17,12 @@
 		1103B77625D99A20002C718A /* FavoriteRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1103B77525D99A20002C718A /* FavoriteRouter.swift */; };
 		1103B77C25D99A68002C718A /* AlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1103B77A25D99A68002C718A /* AlertCell.swift */; };
 		1103B77D25D99A68002C718A /* AlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1103B77B25D99A68002C718A /* AlertCell.xib */; };
+		1133239725DA1D9A00783BDE /* DetailCharacterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133239625DA1D9A00783BDE /* DetailCharacterTableViewController.swift */; };
+		1133239C25DA1E6A00783BDE /* ExtrasCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133239B25DA1E6A00783BDE /* ExtrasCollectionViewController.swift */; };
+		113323A125DA203900783BDE /* DetailCharacterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113323A025DA203900783BDE /* DetailCharacterPresenter.swift */; };
+		113323A625DA204600783BDE /* DetailCharacterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113323A525DA204600783BDE /* DetailCharacterInteractor.swift */; };
+		113323AB25DA205200783BDE /* DetailCharacterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113323AA25DA205200783BDE /* DetailCharacterRouter.swift */; };
+		113323B025DA206400783BDE /* DetailCharacterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113323AF25DA206400783BDE /* DetailCharacterProtocol.swift */; };
 		113B235025D9A73A000BE587 /* CharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B234E25D9A73A000BE587 /* CharacterCell.swift */; };
 		113B235125D9A73A000BE587 /* CharacterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 113B234F25D9A73A000BE587 /* CharacterCell.xib */; };
 		113B235B25D9AB8B000BE587 /* NibReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B235A25D9AB8B000BE587 /* NibReusable.swift */; };
@@ -71,6 +77,12 @@
 		1103B77525D99A20002C718A /* FavoriteRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRouter.swift; sourceTree = "<group>"; };
 		1103B77A25D99A68002C718A /* AlertCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCell.swift; sourceTree = "<group>"; };
 		1103B77B25D99A68002C718A /* AlertCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertCell.xib; sourceTree = "<group>"; };
+		1133239625DA1D9A00783BDE /* DetailCharacterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCharacterTableViewController.swift; sourceTree = "<group>"; };
+		1133239B25DA1E6A00783BDE /* ExtrasCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtrasCollectionViewController.swift; sourceTree = "<group>"; };
+		113323A025DA203900783BDE /* DetailCharacterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCharacterPresenter.swift; sourceTree = "<group>"; };
+		113323A525DA204600783BDE /* DetailCharacterInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCharacterInteractor.swift; sourceTree = "<group>"; };
+		113323AA25DA205200783BDE /* DetailCharacterRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCharacterRouter.swift; sourceTree = "<group>"; };
+		113323AF25DA206400783BDE /* DetailCharacterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCharacterProtocol.swift; sourceTree = "<group>"; };
 		113B234E25D9A73A000BE587 /* CharacterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCell.swift; sourceTree = "<group>"; };
 		113B234F25D9A73A000BE587 /* CharacterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterCell.xib; sourceTree = "<group>"; };
 		113B235A25D9AB8B000BE587 /* NibReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibReusable.swift; sourceTree = "<group>"; };
@@ -266,6 +278,12 @@
 		11FF3A9925D73E4000C4DBE5 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				1133239625DA1D9A00783BDE /* DetailCharacterTableViewController.swift */,
+				113323A025DA203900783BDE /* DetailCharacterPresenter.swift */,
+				113323A525DA204600783BDE /* DetailCharacterInteractor.swift */,
+				113323AA25DA205200783BDE /* DetailCharacterRouter.swift */,
+				113323AF25DA206400783BDE /* DetailCharacterProtocol.swift */,
+				1133239B25DA1E6A00783BDE /* ExtrasCollectionViewController.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -482,6 +500,8 @@
 				113B236525D9BF64000BE587 /* MainTabBarController.swift in Sources */,
 				11FF3AB425D7485200C4DBE5 /* ListCharacterPresenter.swift in Sources */,
 				113B235025D9A73A000BE587 /* CharacterCell.swift in Sources */,
+				1133239C25DA1E6A00783BDE /* ExtrasCollectionViewController.swift in Sources */,
+				113323AB25DA205200783BDE /* DetailCharacterRouter.swift in Sources */,
 				113B237525D9CCCF000BE587 /* Constantes.swift in Sources */,
 				11FCA74225D7817700BDD6E2 /* ListCharactersProtocol.swift in Sources */,
 				11FF3AAF25D7483100C4DBE5 /* ListCharactersViewController.swift in Sources */,
@@ -496,9 +516,13 @@
 				11FCA70A25D76BBD00BDD6E2 /* StringExtension.swift in Sources */,
 				11FF3AB925D7487500C4DBE5 /* ListCharactersInteractor.swift in Sources */,
 				1103B76725D999EA002C718A /* FavoriteViewController.swift in Sources */,
+				113323A125DA203900783BDE /* DetailCharacterPresenter.swift in Sources */,
 				11FCA70425D76B4400BDD6E2 /* Result.swift in Sources */,
 				113B236025D9AEAE000BE587 /* FavoriteProtocol.swift in Sources */,
+				113323B025DA206400783BDE /* DetailCharacterProtocol.swift in Sources */,
+				1133239725DA1D9A00783BDE /* DetailCharacterTableViewController.swift in Sources */,
 				11FF3A5F25D737B900C4DBE5 /* SceneDelegate.swift in Sources */,
+				113323A625DA204600783BDE /* DetailCharacterInteractor.swift in Sources */,
 				1103B75D25D8F62C002C718A /* Database.swift in Sources */,
 				11FCA74F25D7856300BDD6E2 /* ListCharactersRouter.swift in Sources */,
 			);

@@ -8,8 +8,9 @@
 import UIKit
 import Kingfisher
 
-protocol FavoriteActionProtocol: class {
+@objc protocol FavoriteActionProtocol: class {
     func buttonTapped(isFavorite: Bool, character: FavoriteCharacter?)
+    @objc optional func updateImage(id: Int, image: UIImage)
 }
 
 class CharacterCell: UICollectionViewCell, NibReusable {
@@ -45,9 +46,10 @@ class CharacterCell: UICollectionViewCell, NibReusable {
         if let image = image {
             imageCharacter.image = image
         } else if let url = URL(string: imageString) {
-            imageCharacter.kf.setImage(with: url, completionHandler:  { image, _, _, _ in
-                if let image = image {
-                    self.currentCharacter?.image = image
+            imageCharacter.kf.setImage(with: url, completionHandler:  { useImage, _, _, _ in
+                if let useImage = useImage {
+                    self.currentCharacter?.image = useImage
+                    self.delegate?.updateImage?(id: self.currentCharacter?.id ?? Int(), image: useImage)
                 }
             })
 

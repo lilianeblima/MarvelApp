@@ -19,6 +19,8 @@ protocol ViewToPresenterListCharactersProtocol: class {
     func updateFavoriteCharacter(isFavorite: Bool, character: FavoriteCharacter?)
     func checkFavoriteUpdate()
     func getTitleGridButton() -> String
+    func pushCharacterDetail(character: Character)
+    func updateImageInCharacters(id: Int, image: UIImage)
 }
 
 protocol PresenterToViewListCharactersProtocol: class {
@@ -38,6 +40,7 @@ protocol PresenterToInteractorListCharactersProtocol: class {
     func updateFavoriteCharacter(isFavorite: Bool, character: FavoriteCharacter?)
     func checkFavoriteUpdate()
     func getTitleGridButton() -> String
+    func updateImageInCharacters(id: Int, image: UIImage)
 }
 
 protocol InteractorToPresenterListCharactersProtocol: class {
@@ -48,4 +51,5 @@ protocol InteractorToPresenterListCharactersProtocol: class {
 
 protocol PresenterToRouterListCharactersProtocol: class {
     static func createModule() -> UIViewController
+    func pushToCharacterDetail(on view: PresenterToViewListCharactersProtocol, with character: Character)
 }

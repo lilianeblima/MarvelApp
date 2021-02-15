@@ -9,7 +9,8 @@ import UIKit
 import Alamofire
 
 class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
-    var presenter: InteractorToPresenterListCharactersProtocol?
+
+    weak var presenter: InteractorToPresenterListCharactersProtocol?
     var result: Result?
     private var wating: Bool = false
     var currentLayoutCollection: CustomLayout = .grid
@@ -99,6 +100,12 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
         }
         currentLayoutCollection = customLayout
         return(buttonTitle, customLayout)
+    }
+    
+    func updateImageInCharacters(id: Int, image: UIImage) {
+        if let index = result?.data.allCharacters.firstIndex(where: { $0.id == id }) {
+            result?.data.allCharacters[index].image = image
+        }
     }
     
     // MARK: - Favorite Action

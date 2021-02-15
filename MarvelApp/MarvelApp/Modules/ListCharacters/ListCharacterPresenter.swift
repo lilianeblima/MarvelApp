@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import UIKit
 
 class ListCharacterPresenter: ViewToPresenterListCharactersProtocol {
-
+    
     weak var view: PresenterToViewListCharactersProtocol?
     var interactor: PresenterToInteractorListCharactersProtocol?
     var router: PresenterToRouterListCharactersProtocol?
@@ -49,6 +50,13 @@ class ListCharacterPresenter: ViewToPresenterListCharactersProtocol {
         interactor?.getTitleGridButton() ?? String()
     }
     
+    func pushCharacterDetail(character: Character) {
+        router?.pushToCharacterDetail(on: view!, with: character)
+    }
+    
+    func updateImageInCharacters(id: Int, image: UIImage) {
+        interactor?.updateImageInCharacters(id: id, image: image)
+    }
 }
 
 extension ListCharacterPresenter: InteractorToPresenterListCharactersProtocol {

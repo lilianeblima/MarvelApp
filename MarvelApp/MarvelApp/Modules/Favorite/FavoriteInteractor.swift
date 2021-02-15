@@ -9,7 +9,7 @@ import UIKit
 
 class FavoriteInteractor: PresenterToInteracatorFavoriteProtocol {
     
-    var presenter: InteractorToPresenterFavoriteProtocol?
+    weak var presenter: InteractorToPresenterFavoriteProtocol?
     
     var favoritesCharacters: [FavoriteCharacter] {
         return database.getAllElements()

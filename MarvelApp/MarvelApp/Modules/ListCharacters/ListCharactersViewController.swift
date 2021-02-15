@@ -63,6 +63,12 @@ extension ListCharactersViewController: UICollectionViewDelegate, UICollectionVi
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let character = presenter?.getSelectedCharacter(index: indexPath.row) {
+            presenter?.pushCharacterDetail(character: character)
+        }
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height
         if endScrolling >= (scrollView.contentSize.height) {
@@ -92,5 +98,7 @@ extension ListCharactersViewController: FavoriteActionProtocol {
         presenter?.updateFavoriteCharacter(isFavorite: isFavorite, character: character)
     }
     
-    
+    func updateImage(id: Int, image: UIImage) {
+        presenter?.updateImageInCharacters(id: id, image: image)
+    }
 }
