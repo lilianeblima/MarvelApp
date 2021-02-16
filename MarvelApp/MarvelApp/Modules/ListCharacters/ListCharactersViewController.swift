@@ -79,6 +79,7 @@ extension ListCharactersViewController: UICollectionViewDelegate, UICollectionVi
         guard let cell: CharacterCell = collectionView.dequeueReusableCell(for: indexPath), let character = presenter?.getSelectedCharacter(index: indexPath.row) else {
             return UICollectionViewCell()
         }
+        cell.delegate = self
         cell.configure(character: character)
         return cell
     }

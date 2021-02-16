@@ -10,33 +10,33 @@ import Alamofire
 
 
 class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
-
-    
     
     weak var presenter: InteractorToPresenterListCharactersProtocol?
     var result: Result?
     private var wating: Bool = false
-    private var favorites: [FavoriteCharacter] = []
+    private let appGroup = "group.com.MarvelApp"
     private let database = Database()
+    private var favorites: [FavoriteCharacter] {
+        return database.getAllElements()
+    }
+    
     typealias CompletionHandler = (_ success: Bool, _ errorMessage: String?) -> Void
     
     var viewLayout: CustomLayoutCell = CustomLayoutCell(action: .loading, customLayout: CustomFlowLayout(custom: .list))
     
-    func updateLayout(newLayout: CustomLayoutCell) {
-        viewLayout = newLayout
-    }
 
+
+    // MARK: - Resquest Characters
     func get(url: URL?, completion: @escaping (Response<Result>) -> Void) {
         NetworkManager.request(url: url, completion: completion)
     }
-
 
     func getCharacters(url: URL?) {
         get(url: url) { response in
             switch response {
             case .success(let responseValue):
                 self.result = responseValue
-                self.updateFavorite()
+                self.updateFavoriteCharacters()
                 self.saveToWidget()
                 self.updateLayout(newLayout: self.successAction())
                 self.presenter?.successResponse()
@@ -52,15 +52,6 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
         updateLayout(newLayout: initialAction())
         self.presenter?.successResponse()
         getCharacters(url: RequestEndpoint.characters(customQuery: nil).url)
-    }
-    
-    func updateFavorite() {
-        for item in favorites  {
-            if let index = self.result?.data.allCharacters.firstIndex(where: { $0.id == item.id }) {
-                self.result?.data.allCharacters[index].isFavorite = true
-                favorites.removeAll(where: { $0.id == item.id })
-            }
-        }
     }
     
     func getNewCharacters() {
@@ -96,13 +87,18 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
         for character in newCharacters {
             result?.data.allCharacters.append(character)
         }
-        updateFavorite()
+        updateFavoriteCharacters()
     }
     
     func getQuery() -> [String: String] {
         return ["offset": "\(result?.data.allCharacters.count ?? 0)"]
     }
     
+    func updateLayout(newLayout: CustomLayoutCell) {
+        viewLayout = newLayout
+    }
+    
+    // MARK: - Update Layout
     func changeLayoutAction() -> (title: String, customLayout: CustomLayout) {
         var customLayout = CustomLayout.grid
         var buttonTitle = Buttons.list
@@ -157,10 +153,9 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
         selectedActionFavorite(withCharacter: character, isFavorite: isFavorite) { success, errorMessage  in
             if success, let index = self.result?.data.allCharacters.firstIndex(where: { $0.id == character?.id }) {
                 self.result?.data.allCharacters[index].isFavorite = isFavorite
-                // Ou atualizar só a celula?
                 self.presenter?.successResponse()
             } else {
-                // Error
+                self.presenter?.getCharactersFail(errorMessage: errorMessage ?? ErrorMessage.defaultMessage)
             }
         }
     }
@@ -183,12 +178,21 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
         database.remove(favoriteId: id, completion: completion)
     }
     
+    func updateFavoriteCharacters() {
+        for item in favorites  {
+            if let index = self.result?.data.allCharacters.firstIndex(where: { $0.id == item.id }) {
+                self.result?.data.allCharacters[index].isFavorite = true
+            }
+        }
+    }
+    
     func getTitleGridButton() -> String {
         return viewLayout.customLayout.customType == .grid ? Buttons.list : Buttons.grid
     }
     
+    // MARK: - Widget
     func saveToWidget() {
-        let sharedDefaults = UserDefaults(suiteName: "group.com.MarvelApp")
+        let sharedDefaults = UserDefaults(suiteName: appGroup)
         if let characters = result?.data.allCharacters {
             let selecetdCharacters = characters[0..<3]
             for (index, iten) in selecetdCharacters.enumerated() {
@@ -198,7 +202,7 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
     }
     
     func saveImageWidget() {
-        let sharedDefaults = UserDefaults(suiteName: "group.com.MarvelApp")
+        let sharedDefaults = UserDefaults(suiteName: appGroup)
         if let characters = result?.data.allCharacters {
             let selecetdCharacters = characters[0..<3]
             for (index, iten) in selecetdCharacters.enumerated() {

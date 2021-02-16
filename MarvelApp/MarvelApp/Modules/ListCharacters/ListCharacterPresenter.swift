@@ -65,7 +65,6 @@ class ListCharacterPresenter: ViewToPresenterListCharactersProtocol {
     func getLayout() -> CustomFlowLayout {
         interactor?.getLayout() ?? CustomFlowLayout(custom: .list)
     }
-    
 }
 
 extension ListCharacterPresenter: InteractorToPresenterListCharactersProtocol {
