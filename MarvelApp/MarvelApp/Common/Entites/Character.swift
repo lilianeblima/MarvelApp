@@ -32,11 +32,18 @@ struct Character: Codable {
             return nil
         }
         let imageData = NSData(data: jpegImage)
-        let favoriteCharacter = FavoriteCharacter()
-        favoriteCharacter.name = name
-        favoriteCharacter.id = id
-        favoriteCharacter.image = imageData
+        let favoriteCharacter = FavoriteCharacter(name: name, image: imageData, id: id)
         return favoriteCharacter
+    }
+    
+    init(name: String, id: Int, imageObject: ImageObject?, description: String?, image: UIImage?, comics: [ExtraPlus]?, series: [ExtraPlus]?) {
+        self.name = name
+        self.id = id
+        self.imageObject = imageObject ?? ImageObject(path: String(), extension: String())
+        self.description = description
+        self.image = image
+        self.comics = comics
+        self.series = series
     }
 }
 

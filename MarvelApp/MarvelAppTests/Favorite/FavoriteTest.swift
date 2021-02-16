@@ -9,48 +9,24 @@ import XCTest
 @testable import MarvelApp
 
 class FavoriteTest: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
     
     var presenter: FavoritePresenter?
-    var viewController = UIStoryboard(name: "Favorite", bundle: nil).instantiateViewController(identifier: "FavoriteViewController") as? FavoriteViewController
     var interactor = FavoriteMockInteracter()
-    var view: FavoriteViewController?
     
     override func setUp() {
-        
-        let navigation = UINavigationController(rootViewController: viewController!)
-        
         presenter = FavoritePresenter()
         presenter?.interactor = interactor
-        presenter?.view = navigation.viewControllers.first as? FavoriteViewController
-        view = navigation.viewControllers.first as? FavoriteViewController
+        interactor.presenter = presenter
     }
     
     func testNumberRowInSectionSucess() {
         XCTAssertTrue(presenter?.numberOfRowsInSection() == 3)
+        XCTAssertTrue(interactor.numberOfRowsInSection() == 3)
     }
     
     func testCollectionTypeSucess() {
         XCTAssertTrue(presenter?.collectionCellType() == CharacterCell.self)
+        XCTAssertTrue(interactor.collectionCellType() == CharacterCell.self)
     }
     
     func testGetCustomLayoutSucess() {
@@ -61,7 +37,6 @@ class FavoriteTest: XCTestCase {
         XCTAssertTrue(interactorLayout?.direction == UICollectionView.ScrollDirection.vertical)
     }
     
-    // Test connection Interactor/Presenter
     func testNumberOfRowsInSection() {
         XCTAssertEqual(interactor.numberOfRowsInSection(), presenter?.numberOfRowsInSection())
     }
@@ -80,19 +55,25 @@ class FavoriteTest: XCTestCase {
         XCTAssertTrue(interactorLayout?.customType == presenterLayout?.customType)
         XCTAssertTrue(interactorLayout?.direction == presenterLayout?.direction)
     }
-
-}
-
-class FavoriteMockView: PresenterToViewFavoriteProtocol {
-    func refresh() {
+    
+    func testFavoriteSelected() {
+        let favorite1 = FavoriteCharacter(name: "3-D Man", image: nil, id: 0)
+        let favorite2 = FavoriteCharacter(name: "A.I.M", image: nil, id: 1)
+        interactor.favoritesCharacters = [favorite1, favorite2]
         
+        let selected = presenter?.getSelectedFavoriteCharacter(index: 1)
+        XCTAssertEqual(selected?.name, "A.I.M")
+        XCTAssertEqual(selected?.id, 1)
     }
     
-    func showAlert(withTitle: String, andMessage: String) {
-        
+    func testRefresh() {
+        refreshInteractor = false
+        presenter?.refresh()
+        XCTAssertTrue(refreshInteractor)
     }
 }
 
+var refreshInteractor = false
 class FavoriteMockInteracter: PresenterToInteracatorFavoriteProtocol {
     var presenter: InteractorToPresenterFavoriteProtocol?
     
@@ -111,12 +92,11 @@ class FavoriteMockInteracter: PresenterToInteracatorFavoriteProtocol {
     var favoritesCharacters: [FavoriteCharacter] = []
     
     func refresh() {
-        
+        refreshInteractor = true
+        presenter?.refreshData()
     }
     
     func removeFavoriteIten(favorite: FavoriteCharacter?) {
-        
+        presenter?.refreshData()
     }
-    
-    
 }

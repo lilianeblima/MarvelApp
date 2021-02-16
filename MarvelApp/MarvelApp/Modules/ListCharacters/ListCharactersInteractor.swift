@@ -14,7 +14,6 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
     weak var presenter: InteractorToPresenterListCharactersProtocol?
     var result: Result?
     private var wating: Bool = false
-    private let appGroup = "group.com.MarvelApp"
     private let database = Database()
     private var favorites: [FavoriteCharacter] {
         return database.getAllElements()
@@ -150,9 +149,10 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
     
     // MARK: - Favorite Action
     func updateFavoriteCharacter(isFavorite: Bool, character: FavoriteCharacter?) {
-        selectedActionFavorite(withCharacter: character, isFavorite: isFavorite) { success, errorMessage  in
+        let isFavortieCharacter = !database.contains(withId: character?.id ?? 0)
+        selectedActionFavorite(withCharacter: character, isFavorite: isFavortieCharacter) { success, errorMessage  in
             if success, let index = self.result?.data.allCharacters.firstIndex(where: { $0.id == character?.id }) {
-                self.result?.data.allCharacters[index].isFavorite = isFavorite
+                self.result?.data.allCharacters[index].isFavorite = isFavortieCharacter
                 self.presenter?.successResponse()
             } else {
                 self.presenter?.getCharactersFail(errorMessage: errorMessage ?? ErrorMessage.defaultMessage)
@@ -192,17 +192,19 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
     
     // MARK: - Widget
     func saveToWidget() {
-        let sharedDefaults = UserDefaults(suiteName: appGroup)
+        let sharedDefaults = UserDefaults(suiteName: SharedUserDefaults.suitName)
         if let characters = result?.data.allCharacters {
             let selecetdCharacters = characters[0..<3]
             for (index, iten) in selecetdCharacters.enumerated() {
                 sharedDefaults?.setValue(iten.name, forKey: "name\(index)")
+                sharedDefaults?.setValue(iten.id, forKey: "id\(index)")
+                sharedDefaults?.setValue(iten.description, forKey: "description\(index)")
             }
         }
     }
     
     func saveImageWidget() {
-        let sharedDefaults = UserDefaults(suiteName: appGroup)
+        let sharedDefaults = UserDefaults(suiteName: SharedUserDefaults.suitName)
         if let characters = result?.data.allCharacters {
             let selecetdCharacters = characters[0..<3]
             for (index, iten) in selecetdCharacters.enumerated() {

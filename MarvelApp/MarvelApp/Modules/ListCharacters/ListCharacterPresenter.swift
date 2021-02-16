@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class ListCharacterPresenter: ViewToPresenterListCharactersProtocol {
-    
     weak var view: PresenterToViewListCharactersProtocol?
     var interactor: PresenterToInteractorListCharactersProtocol?
     var router: PresenterToRouterListCharactersProtocol?

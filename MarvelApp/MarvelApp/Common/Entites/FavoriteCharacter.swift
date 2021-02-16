@@ -12,4 +12,14 @@ class FavoriteCharacter: Object {
     @objc dynamic var name = String()
     @objc dynamic var image: NSData? = nil
     @objc dynamic var id = 0
+    
+    init(name: String, image: NSData?, id: Int) {
+        self.name = name
+        self.image = image
+        self.id = id
+    }
+    
+    override init() {
+        
+    }
 }

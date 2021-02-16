@@ -34,11 +34,11 @@ class FavoriteInteractor: PresenterToInteracatorFavoriteProtocol {
     }
     
     func removeFavoriteIten(favorite: FavoriteCharacter?) {
-        database.remove(favoriteId: favorite?.id ?? 0) { success, _ in
+        database.remove(favoriteId: favorite?.id ?? 0) { success, errorMessage in
             if success {
                 presenter?.refreshData()
             } else {
-                presenter?.showAlert(withTitle: AlertMessage.title, andMessage: AlertMessage.defaultMessage)
+                presenter?.showAlert(withTitle: AlertMessage.title, andMessage: errorMessage ?? AlertMessage.defaultMessage)
             }
         }
     }

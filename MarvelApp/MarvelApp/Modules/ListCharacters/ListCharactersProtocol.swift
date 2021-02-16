@@ -24,7 +24,6 @@ protocol ViewToPresenterListCharactersProtocol: class {
     func isVisibleChangeLayoutViewButton() -> Bool
     func action() ->  ActionCell
     func getLayout() -> CustomFlowLayout
-    func updateFavorite()
 }
 
 protocol PresenterToInteractorListCharactersProtocol: class {
