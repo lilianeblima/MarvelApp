@@ -35,7 +35,6 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
             switch response {
             case .success(let responseValue):
                 self.result = responseValue
-                self.updateFavoriteCharacters()
                 self.saveToWidget()
                 self.updateLayout(newLayout: self.successAction())
                 self.presenter?.successResponse()
@@ -86,7 +85,6 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
         for character in newCharacters {
             result?.data.allCharacters.append(character)
         }
-        updateFavoriteCharacters()
     }
     
     func getQuery() -> [String: String] {
@@ -151,12 +149,7 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
     func updateFavoriteCharacter(isFavorite: Bool, character: FavoriteCharacter?) {
         let isFavortieCharacter = !database.contains(withId: character?.id ?? 0)
         selectedActionFavorite(withCharacter: character, isFavorite: isFavortieCharacter) { success, errorMessage  in
-            if success, let index = self.result?.data.allCharacters.firstIndex(where: { $0.id == character?.id }) {
-                self.result?.data.allCharacters[index].isFavorite = isFavortieCharacter
-                self.presenter?.successResponse()
-            } else {
-                self.presenter?.getCharactersFail(errorMessage: errorMessage ?? ErrorMessage.defaultMessage)
-            }
+            success ? self.presenter?.successResponse() : self.presenter?.getCharactersFail(errorMessage: errorMessage ?? ErrorMessage.defaultMessage)
         }
     }
     
@@ -176,14 +169,6 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
     
     func removeCharacterFavorite(withId id: Int, completion: CompletionHandler) {
         database.remove(favoriteId: id, completion: completion)
-    }
-    
-    func updateFavoriteCharacters() {
-        for item in favorites  {
-            if let index = self.result?.data.allCharacters.firstIndex(where: { $0.id == item.id }) {
-                self.result?.data.allCharacters[index].isFavorite = true
-            }
-        }
     }
     
     func getTitleGridButton() -> String {

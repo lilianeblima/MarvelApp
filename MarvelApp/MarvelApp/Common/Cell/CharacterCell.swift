@@ -29,7 +29,7 @@ class CharacterCell: UICollectionViewCell, NibReusable {
     }
     
     func configure(character: Character) {
-        
+        setupAutomaticScaleLabel()
         currentCharacter = character
         configureCell(name: character.name, isFavorite: character.isFavorite, imageString: character.imagePath, image: nil)
     }

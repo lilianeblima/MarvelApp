@@ -32,6 +32,7 @@ class ListCharactersViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.topItem?.title = Titles.characters
         updateRightButton()
+        collectionView.reloadData()
     }
     
     @objc func refreshAction() {

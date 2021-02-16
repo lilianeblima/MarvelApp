@@ -20,7 +20,10 @@ struct Character: Codable {
         return "\(imageObject.path).\(imageObject.extension)"
     }
     
-    var isFavorite: Bool = false
+    var isFavorite: Bool {
+        let database = Database()
+        return database.contains(withId: id)
+    }
     
     enum CodingKeys: String, CodingKey {
         case name, id, description
