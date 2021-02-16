@@ -8,24 +8,6 @@
 import XCTest
 @testable import MarvelApp
 
-class DetailTest: XCTestCase {
-
-    var presenter = DetailPresenterMock()
-    var interactor = DetailInteractorMock()
-    var viewController = UIStoryboard(name: "ListCharacters", bundle: nil).instantiateViewController(identifier: "DetailCharacterTableViewController") as DetailCharacterTableViewController
-    
-    override func setUp() {
-        viewController.presenter = presenter
-        presenter.view = viewController
-        presenter.interactor = interactor
-    }
-    
-    func testPresenter() {
-        
-       //  XCTAssertEqual(viewController.presenter?.fillDescription(), "teste")
-    }
-}
-
 class DetailViewTest: XCTestCase {
 
     var presenter = DetailPresenterMock()
@@ -107,23 +89,52 @@ class DetailPresenterTest: XCTestCase {
 }
 
 class DetailInteractorTest: XCTestCase {
-    var presenter = DetailPresenterMock()
+    var presenter = DetailPresenterMockInteractorResponseTest()
     var interactor: DetailCharacterInteractor?
     
     
     override func setUp() {
+        interactor = DetailCharacterInteractor()
+        interactor?.presenter = presenter
         let character = Character(name: "A.I.M", id: 0, imageObject: ImageObject(path: "pathImage", extension: "jpg"), description: "Descrição do personagem A.I.M", image: nil, comics: [ExtraPlus(id: 0, thumbnail: ImageObject(path: "pathImage", extension: "jpg"), title: "Comic 1"), ExtraPlus(id: 0, thumbnail: ImageObject(path: "pathImage", extension: "jpg"), title: "Comic 2")], series: [ExtraPlus(id: 0, thumbnail: ImageObject(path: "pathImage", extension: "jpg"), title: "Serie 1"), ExtraPlus(id: 0, thumbnail: ImageObject(path: "pathImage", extension: "jpg"), title: "Serie 2")])
+        interactor?.character = character
     }
     
     func testDescription() {
         XCTAssertEqual(interactor?.fillDescription(), "Descrição do personagem A.I.M")
     }
     
-    func testAction() {
-        let result = interactor?.action(message: "Erro", extras: nil)
-        // XCTAssertEqual(result?.customLayout.self, ActionCell.self)
+    func testUpateFavorite() {
+        interactor?.updateFavoriteCharacter()
+        XCTAssertEqual("Ops", alertValue.title)
+        XCTAssertEqual("Tivemos um problema, tente novamente mais tarde", alertValue.message)
     }
+}
 
+
+class DetailPresenterMockInteractorResponseTest: InteractorToPresenterDetailCharacterProtocol {
+    func updateWithImage(image: UIImage) {
+        
+    }
+    
+    func updateWithStringImage(stringImage: URL) {
+    }
+    
+    func updateComics(action: ActionCell, customLayout: CustomFlowLayout) {
+        
+    }
+    
+    func updateSeries(action: ActionCell, customLayout: CustomFlowLayout) {
+        
+    }
+    
+    func updateFavoriteIcon() {
+        
+    }
+    
+    func showAlertError(message: String) {
+        alertValue = (title: "Ops", message: message)
+    }
 }
 
 
@@ -157,7 +168,6 @@ class DetailInteractorMock: PresenterToInteracatorDetailCharacterProtocol {
     }
     
 }
-
 
 var updateComicsAndSeriesTest = false
 var updateFavoriteCharacterTest = false
