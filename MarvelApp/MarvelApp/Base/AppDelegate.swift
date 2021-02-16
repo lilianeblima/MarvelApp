@@ -18,6 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         database.clear()
         return true
     }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        if url.scheme == "open" {
+            print(url.host)
+        }
+        
+        return true
+    }
 }
 
 

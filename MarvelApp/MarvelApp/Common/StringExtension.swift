@@ -52,3 +52,9 @@ extension URL {
         self = urlComponents.url ?? self
     }
 }
+
+extension UIImage {
+    func toData() -> Data? {
+        return self.jpegData(compressionQuality: 0.9)
+    }
+}

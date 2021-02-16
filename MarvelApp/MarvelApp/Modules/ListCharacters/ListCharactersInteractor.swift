@@ -8,8 +8,9 @@
 import UIKit
 import Alamofire
 
-class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
 
+class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
+    
     weak var presenter: InteractorToPresenterListCharactersProtocol?
     var result: Result?
     private var wating: Bool = false
@@ -18,6 +19,26 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
     private let database = Database()
     typealias CompletionHandler = (_ success: Bool, _ errorMessage: String?) -> Void
 
+    func get(url: URL?, completion: @escaping (Response<Result>) -> Void) {
+        NetworkManager.request(url: url, completion: completion)
+    }
+    
+    func getResult(url: URL?) {
+        get(url: url) { response in
+            switch response {
+            case .success(let responseValue):
+                self.result = responseValue
+                self.updateFavorite()
+                self.presenter?.successResponse()
+            case .error(let error):
+                let customError = error as? ErrorResponse
+                print(customError?.localizedDescription)
+//                let action = self.action(message: customError?.localizedDescription ?? ErrorMessage.defaultMessage, extras: nil)
+//                self.presenter?.updateComics(action: action.action, customLayout: action.customLayout)
+            }
+        }
+    }
+    
     func getCharacters() {
         guard let url = RequestEndpoint.characters(customQuery: nil).url else {
             //TO DO: tratamento de erro
@@ -30,6 +51,7 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
                     let decoder = try JSONDecoder().decode(Result.self, from: data)
                     self.result = decoder
                     self.updateFavorite()
+                    self.saveToWidget()
                     self.presenter?.successResponse()
                 } catch {
                     // Tratamento de erro
@@ -106,6 +128,8 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
         if let index = result?.data.allCharacters.firstIndex(where: { $0.id == id }) {
             result?.data.allCharacters[index].image = image
         }
+        self.saveImageWidget()
+
     }
     
     // MARK: - Favorite Action
@@ -139,10 +163,29 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
         database.remove(favoriteId: id, completion: completion)
     }
     
-    func checkFavoriteUpdate() {
-    }
-    
     func getTitleGridButton() -> String {
         return currentLayoutCollection == .grid ? Buttons.list : Buttons.grid
+    }
+    
+    func saveToWidget() {
+        let sharedDefaults = UserDefaults(suiteName: "group.com.MarvelApp")
+        if let characters = result?.data.allCharacters {
+            let selecetdCharacters = characters[0..<3]
+            for (index, iten) in selecetdCharacters.enumerated() {
+                sharedDefaults?.setValue(iten.name, forKey: "name\(index)")
+            }
+        }
+    }
+    
+    func saveImageWidget() {
+        let sharedDefaults = UserDefaults(suiteName: "group.com.MarvelApp")
+        if let characters = result?.data.allCharacters {
+            let selecetdCharacters = characters[0..<3]
+            for (index, iten) in selecetdCharacters.enumerated() {
+                if let image = iten.image?.toData() {
+                    sharedDefaults?.setValue(image, forKey: "image\(index)")
+                }
+            }
+        }
     }
 }

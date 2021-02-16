@@ -11,7 +11,6 @@ class ListCharactersViewController: UIViewController {
     
     var presenter: ViewToPresenterListCharactersProtocol?
     
-    @IBOutlet weak var rightButtonItem: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
     
     lazy var refreshControl: UIRefreshControl = {
@@ -22,14 +21,26 @@ class ListCharactersViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.collectionView.register(AlertCell.self)
+        self.collectionView.register(CharacterCell.self)
+        self.collectionView.register(LoadingCell.self)
         collectionView.collectionViewLayout = CustomFlowLayout(custom: .grid)
         collectionView.addSubview(refreshControl)
         self.presenter?.getInitialCharacters()
+        
+        let userDefaults = UserDefaults(suiteName: "group.com.MarvelApp")
+        userDefaults?.setValue("Lili testando", forKey: "456")
+        
+        
+//        let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.MarvelApp")
+//        let myCustomText = containerURL?.appendingPathComponent("Meu texto")
+//        let data = Data("test read".utf8)
+//        try! data.write(to: containerURL!)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter?.checkFavoriteUpdate()
         self.navigationController?.navigationBar.topItem?.title = Titles.characters
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: presenter?.getTitleGridButton(), style: .done, target: self, action: #selector(changeListStyleAction))
     }

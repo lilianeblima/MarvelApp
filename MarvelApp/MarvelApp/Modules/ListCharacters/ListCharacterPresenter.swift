@@ -42,10 +42,6 @@ class ListCharacterPresenter: ViewToPresenterListCharactersProtocol {
         interactor?.updateFavoriteCharacter(isFavorite: isFavorite, character: character)
     }
     
-    func checkFavoriteUpdate() {
-        interactor?.checkFavoriteUpdate()
-    }
-    
     func getTitleGridButton() -> String {
         interactor?.getTitleGridButton() ?? String()
     }

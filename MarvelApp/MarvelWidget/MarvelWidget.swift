@@ -69,21 +69,20 @@ struct MarvelWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        
-        let strings = [entry.title]
-//        ZStack {
-//            Text("Hello World")
-//            Text("This is inside a stack")
-//        }
+        let userDefaults = UserDefaults(suiteName: "group.com.MarvelApp")
+        let characters = Helper.getDatas()
         HStack(alignment: .top, spacing: 20) {
-            ForEach(strings, id: \.self) { value in
+            ForEach(characters, id: \.self) { character in
                 VStack() {
-                    Image(uiImage: UIImage(named: "tabbarFavoriteSelected")!)
+                    Button(character.name) {
+                        
+                    }
+                    Image(uiImage: character.image)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 30, height: 30)
                         .clipped()
-                    Text(value)
+                    Text(character.name)
                 }
                 
                 //Spacer()
@@ -110,6 +109,49 @@ struct MarvelWidgetEntryView : View {
     }
 }
 
+struct Helper {
+    static func getTitles() -> [String] {
+        var titles: [String] = []
+        
+        let userDefaults = UserDefaults(suiteName: "group.com.MarvelApp")
+        
+        for iten in 0..<3 {
+            let newString = userDefaults?.string(forKey: "name\(iten)") ?? "Não achei valor"
+            titles.append(newString)
+        }
+        
+        return titles
+    }
+    
+    static func getDatas() -> [CharacterWidget] {
+        let userDefaults = UserDefaults(suiteName: "group.com.MarvelApp")
+        var result: [CharacterWidget] = []
+        
+        for iten in 0..<3 {
+            let name = userDefaults?.string(forKey: "name\(iten)") ?? "Não achei valor"
+            let imageData = userDefaults?.data(forKey: "image\(iten)") ?? Data()
+            let image = UIImage(data: imageData) ?? UIImage()
+            let character = CharacterWidget(name: name, image: image)
+            result.append(character)
+        }
+        
+        
+        
+        return result
+    }
+}
+
+struct CharacterWidget: Hashable {
+    let name: String
+    let image: UIImage
+    
+    init(name: String, image: UIImage) {
+        self.name = name
+        self.image = image
+    }
+}
+
+
 @main
 struct MarvelWidget: Widget {
     let kind: String = "MarvelWidget"
@@ -125,9 +167,15 @@ struct MarvelWidget: Widget {
 
 struct MarvelWidget_Previews: PreviewProvider {
     static var previews: some View {
-        let userDefaults = UserDefaults()
-        let txt = userDefaults.string(forKey: "123") ?? "Não achei valor"
-        MarvelWidgetEntryView(entry: SimpleEntry(date: Date(), title: txt))
+  
+        
+//        let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.MarvelApp")?.appendingPathComponent("hello")
+//                let data = try! Data(contentsOf: url!)
+//                let txt = String(data: data, encoding: .utf8) ?? "Não achei valor"
+        
+       // print(userDefaults?.string(forKey: "456"))
+        
+        MarvelWidgetEntryView(entry: SimpleEntry(date: Date(), title: "lol"))
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }

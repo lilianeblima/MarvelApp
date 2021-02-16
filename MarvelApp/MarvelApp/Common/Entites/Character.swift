@@ -28,7 +28,7 @@ struct Character: Codable {
     }
     
     func convertToFavorite() -> FavoriteCharacter? {
-        guard let image = image, let jpegImage = image.jpegData(compressionQuality: 0.9) else {
+        guard let jpegImage = image?.toData() else {
             return nil
         }
         let imageData = NSData(data: jpegImage)

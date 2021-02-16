@@ -136,6 +136,9 @@
 		116BACFC25DB393800CDB67A /* MarvelWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelWidget.swift; sourceTree = "<group>"; };
 		116BACFE25DB393D00CDB67A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		116BAD0025DB393D00CDB67A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		116BAD5A25DBEFD600CDB67A /* MarvelApp.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = MarvelApp.entitlements; path = MarvelApp/MarvelApp.entitlements; sourceTree = "<group>"; };
+		116BAD5B25DBEFEC00CDB67A /* MarvelWidgetExtension.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = MarvelWidgetExtension.entitlements; sourceTree = SOURCE_ROOT; };
+		116BAD7C25DC0EFF00CDB67A /* Pods_MarvelApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_MarvelApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		118B4D4325DAC0D0009939BB /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		118B4D4425DAC0D0009939BB /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 		118B4D5C25DAF010009939BB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -254,6 +257,7 @@
 		116BACFB25DB393800CDB67A /* MarvelWidget */ = {
 			isa = PBXGroup;
 			children = (
+				116BAD5B25DBEFEC00CDB67A /* MarvelWidgetExtension.entitlements */,
 				116BACFC25DB393800CDB67A /* MarvelWidget.swift */,
 				116BACFE25DB393D00CDB67A /* Assets.xcassets */,
 				116BAD0025DB393D00CDB67A /* Info.plist */,
@@ -301,6 +305,7 @@
 		11FF3A5025D737B900C4DBE5 = {
 			isa = PBXGroup;
 			children = (
+				116BAD5A25DBEFD600CDB67A /* MarvelApp.entitlements */,
 				11FF3A5B25D737B900C4DBE5 /* MarvelApp */,
 				11FF3A7225D737BC00C4DBE5 /* MarvelAppTests */,
 				11FF3A7D25D737BC00C4DBE5 /* MarvelAppUITests */,
@@ -413,6 +418,7 @@
 		D58860CA79B5063957FFCE73 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				116BAD7C25DC0EFF00CDB67A /* Pods_MarvelApp.framework */,
 				11532AE14AE6CEE1AE1CFF35 /* Pods_MarvelApp.framework */,
 				116BACF725DB393800CDB67A /* WidgetKit.framework */,
 				116BACF925DB393800CDB67A /* SwiftUI.framework */,
@@ -927,7 +933,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MarvelApp/MarvelApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KW44L7584U;
 				INFOPLIST_FILE = MarvelApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

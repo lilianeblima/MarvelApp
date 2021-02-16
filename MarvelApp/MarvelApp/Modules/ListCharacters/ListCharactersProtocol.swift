@@ -11,34 +11,27 @@ protocol ViewToPresenterListCharactersProtocol: class {
     var view: PresenterToViewListCharactersProtocol? { get set }
     var interactor: PresenterToInteractorListCharactersProtocol? { get set }
     var router: PresenterToRouterListCharactersProtocol? { get set }
+    
     func getInitialCharacters()
     func getNumberOfItemsInSection() -> Int
     func getSelectedCharacter(index: Int) -> Character?
-    func isNeedUpdateCharacters()
+    func isNeedUpdateCharacters() //Trocar por loadMoreCharacters
     func getCustomLayout() -> (title: String, customLayout: CustomLayout)?
     func updateFavoriteCharacter(isFavorite: Bool, character: FavoriteCharacter?)
-    func checkFavoriteUpdate()
-    func getTitleGridButton() -> String
+    func getTitleGridButton() -> String //titleChangeLayoutViewButton
     func pushCharacterDetail(character: Character)
     func updateImageInCharacters(id: Int, image: UIImage)
 }
 
-protocol PresenterToViewListCharactersProtocol: class {
-    func updateCollectionView()
-    func getCharactersFail(errorMessage: String)
-    func showLoadViewCell()
-}
-
-
 protocol PresenterToInteractorListCharactersProtocol: class {
     var presenter: InteractorToPresenterListCharactersProtocol? { get set }
+    var result: Result? { get }
+    
     func getCharacters()
     func isNeedUpdateCharacters()
     func updateCharacters()
     func getCustomLayout() -> (title: String, customLayout: CustomLayout)
-    var result: Result? { get }
     func updateFavoriteCharacter(isFavorite: Bool, character: FavoriteCharacter?)
-    func checkFavoriteUpdate()
     func getTitleGridButton() -> String
     func updateImageInCharacters(id: Int, image: UIImage)
 }
@@ -47,6 +40,12 @@ protocol InteractorToPresenterListCharactersProtocol: class {
     func successResponse()
     func getCharactersFail(errorMessage: String)
     func needUpdateCharacters()
+}
+
+protocol PresenterToViewListCharactersProtocol: class {
+    func updateCollectionView()
+    func getCharactersFail(errorMessage: String)
+    func showLoadViewCell()
 }
 
 protocol PresenterToRouterListCharactersProtocol: class {
