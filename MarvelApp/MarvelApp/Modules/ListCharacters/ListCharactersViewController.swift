@@ -24,25 +24,14 @@ class ListCharactersViewController: UIViewController {
         self.collectionView.register(AlertCell.self)
         self.collectionView.register(CharacterCell.self)
         self.collectionView.register(LoadingCell.self)
-        collectionView.collectionViewLayout = CustomFlowLayout(custom: .grid)
         collectionView.addSubview(refreshControl)
         self.presenter?.getInitialCharacters()
-        
-        let userDefaults = UserDefaults(suiteName: "group.com.MarvelApp")
-        userDefaults?.setValue("Lili testando", forKey: "456")
-        
-        
-//        let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.MarvelApp")
-//        let myCustomText = containerURL?.appendingPathComponent("Meu texto")
-//        let data = Data("test read".utf8)
-//        try! data.write(to: containerURL!)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.topItem?.title = Titles.characters
-        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: presenter?.getTitleGridButton(), style: .done, target: self, action: #selector(changeListStyleAction))
+        updateRightButton()
     }
     
     @objc func refreshAction() {
@@ -50,11 +39,19 @@ class ListCharactersViewController: UIViewController {
     }
     
     @objc func changeListStyleAction() {
-        guard let customLayout = presenter?.getCustomLayout() else { return }
+        guard let customLayout = presenter?.changeLayoutAction() else { return }
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem?.title = customLayout.title
         UIView.animate(withDuration: 0.2) { () -> Void in
             self.collectionView.collectionViewLayout.invalidateLayout()
             self.collectionView.setCollectionViewLayout(CustomFlowLayout(custom: customLayout.customLayout), animated: true)
+        }
+    }
+    
+    func updateRightButton() {
+        if let isVisibleRightButton = presenter?.isVisibleChangeLayoutViewButton(), isVisibleRightButton {
+            self.navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: presenter?.getTitleGridButton(), style: .done, target: self, action: #selector(changeListStyleAction))
+        } else {
+            self.navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
         }
     }
 }
@@ -65,12 +62,24 @@ extension ListCharactersViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as? CharacterCell, let character = presenter?.getSelectedCharacter(index: indexPath.row) else {
+        guard let action = presenter?.action() else {
+            return UICollectionViewCell()
+        }
+        switch action {
+        case .loading:
+            return collectionView.fillCellLoading(indexPath: indexPath)
+        case .showResult:
+            return fillCellResult(indexPath: indexPath)
+        case .errorMessage(let message):
+            return collectionView.fillCellError(withMessage: message, indexPath: indexPath)
+        }
+    }
+    
+    private func fillCellResult(indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell: CharacterCell = collectionView.dequeueReusableCell(for: indexPath), let character = presenter?.getSelectedCharacter(index: indexPath.row) else {
             return UICollectionViewCell()
         }
         cell.configure(character: character)
-        cell.delegate = self
         return cell
     }
     
@@ -93,14 +102,15 @@ extension ListCharactersViewController: PresenterToViewListCharactersProtocol {
         self.collectionView.reloadData()
         collectionView.refreshControl?.endRefreshing()
         refreshControl.endRefreshing()
+        updateRightButton()
+        guard let customLayout = presenter?.getLayout else { return }
+        collectionView.collectionViewLayout = customLayout()
     }
     
     func getCharactersFail(errorMessage: String) {
-        print(errorMessage)
-    }
-    
-    func showLoadViewCell() {
-        // TODO: Mostrar footer de loading
+        let alert = UIAlertController(title: AlertMessage.title, message: errorMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: AlertMessage.ok, style: .default))
+        self.present(alert, animated: true)
     }
 }
 

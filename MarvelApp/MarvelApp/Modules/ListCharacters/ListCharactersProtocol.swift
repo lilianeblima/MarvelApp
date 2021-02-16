@@ -16,36 +16,41 @@ protocol ViewToPresenterListCharactersProtocol: class {
     func getNumberOfItemsInSection() -> Int
     func getSelectedCharacter(index: Int) -> Character?
     func isNeedUpdateCharacters() //Trocar por loadMoreCharacters
-    func getCustomLayout() -> (title: String, customLayout: CustomLayout)?
+    func changeLayoutAction() -> (title: String, customLayout: CustomLayout)?
     func updateFavoriteCharacter(isFavorite: Bool, character: FavoriteCharacter?)
     func getTitleGridButton() -> String //titleChangeLayoutViewButton
     func pushCharacterDetail(character: Character)
     func updateImageInCharacters(id: Int, image: UIImage)
+    func isVisibleChangeLayoutViewButton() -> Bool
+    func action() ->  ActionCell
+    func getLayout() -> CustomFlowLayout
 }
 
 protocol PresenterToInteractorListCharactersProtocol: class {
     var presenter: InteractorToPresenterListCharactersProtocol? { get set }
     var result: Result? { get }
     
-    func getCharacters()
+    func getInitialCharacters()
     func isNeedUpdateCharacters()
     func updateCharacters()
-    func getCustomLayout() -> (title: String, customLayout: CustomLayout)
+    func changeLayoutAction() -> (title: String, customLayout: CustomLayout)
     func updateFavoriteCharacter(isFavorite: Bool, character: FavoriteCharacter?)
     func getTitleGridButton() -> String
     func updateImageInCharacters(id: Int, image: UIImage)
+    
+    func isVisibleChangeLayoutViewButton() -> Bool
+    func action() ->  ActionCell
+    func getLayout() -> CustomFlowLayout
 }
 
 protocol InteractorToPresenterListCharactersProtocol: class {
     func successResponse()
     func getCharactersFail(errorMessage: String)
-    func needUpdateCharacters()
 }
 
 protocol PresenterToViewListCharactersProtocol: class {
     func updateCollectionView()
     func getCharactersFail(errorMessage: String)
-    func showLoadViewCell()
 }
 
 protocol PresenterToRouterListCharactersProtocol: class {

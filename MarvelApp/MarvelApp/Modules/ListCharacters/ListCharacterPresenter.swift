@@ -15,11 +15,11 @@ class ListCharacterPresenter: ViewToPresenterListCharactersProtocol {
     var router: PresenterToRouterListCharactersProtocol?
         
     func getInitialCharacters() {
-        interactor?.getCharacters()
+        interactor?.getInitialCharacters()
     }
     
     func getNumberOfItemsInSection() -> Int {
-        return interactor?.result?.data.allCharacters.count ?? 0
+        return interactor?.result?.data.allCharacters.count ?? 1
     }
     
     func getSelectedCharacter(index: Int) -> Character? {
@@ -34,8 +34,8 @@ class ListCharacterPresenter: ViewToPresenterListCharactersProtocol {
         interactor?.updateCharacters()
     }
     
-    func getCustomLayout() -> (title: String, customLayout: CustomLayout)? {
-        return interactor?.getCustomLayout()
+    func changeLayoutAction() -> (title: String, customLayout: CustomLayout)? {
+        return interactor?.changeLayoutAction()
     }
     
     func updateFavoriteCharacter(isFavorite: Bool, character: FavoriteCharacter?) {
@@ -53,13 +53,22 @@ class ListCharacterPresenter: ViewToPresenterListCharactersProtocol {
     func updateImageInCharacters(id: Int, image: UIImage) {
         interactor?.updateImageInCharacters(id: id, image: image)
     }
+    
+    func isVisibleChangeLayoutViewButton() -> Bool {
+        interactor?.isVisibleChangeLayoutViewButton() ?? false
+    }
+    
+    func action() -> ActionCell {
+        interactor?.action() ?? ActionCell.showResult
+    }
+    
+    func getLayout() -> CustomFlowLayout {
+        interactor?.getLayout() ?? CustomFlowLayout(custom: .list)
+    }
+    
 }
 
 extension ListCharacterPresenter: InteractorToPresenterListCharactersProtocol {
-    func needUpdateCharacters() {
-        view?.showLoadViewCell()
-    }
-    
     func successResponse() {
         view?.updateCollectionView()
     }

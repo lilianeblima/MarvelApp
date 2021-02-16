@@ -10,57 +10,48 @@ import Alamofire
 
 
 class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
+
+    
     
     weak var presenter: InteractorToPresenterListCharactersProtocol?
     var result: Result?
     private var wating: Bool = false
-    var currentLayoutCollection: CustomLayout = .grid
     private var favorites: [FavoriteCharacter] = []
     private let database = Database()
     typealias CompletionHandler = (_ success: Bool, _ errorMessage: String?) -> Void
+    
+    var viewLayout: CustomLayoutCell = CustomLayoutCell(action: .loading, customLayout: CustomFlowLayout(custom: .list))
+    
+    func updateLayout(newLayout: CustomLayoutCell) {
+        viewLayout = newLayout
+    }
 
     func get(url: URL?, completion: @escaping (Response<Result>) -> Void) {
         NetworkManager.request(url: url, completion: completion)
     }
-    
-    func getResult(url: URL?) {
+
+
+    func getCharacters(url: URL?) {
         get(url: url) { response in
             switch response {
             case .success(let responseValue):
                 self.result = responseValue
                 self.updateFavorite()
+                self.saveToWidget()
+                self.updateLayout(newLayout: self.successAction())
                 self.presenter?.successResponse()
             case .error(let error):
                 let customError = error as? ErrorResponse
-                print(customError?.localizedDescription)
-//                let action = self.action(message: customError?.localizedDescription ?? ErrorMessage.defaultMessage, extras: nil)
-//                self.presenter?.updateComics(action: action.action, customLayout: action.customLayout)
+                self.updateLayout(newLayout: self.errorAction(message: customError?.localizedDescription ?? ErrorMessage.defaultMessage))
+                self.presenter?.successResponse()
             }
         }
     }
     
-    func getCharacters() {
-        guard let url = RequestEndpoint.characters(customQuery: nil).url else {
-            //TO DO: tratamento de erro
-            return
-        }
-        favorites = database.getAllElements()
-        Alamofire.request(url).response { response in
-            if let data = response.data {
-                do {
-                    let decoder = try JSONDecoder().decode(Result.self, from: data)
-                    self.result = decoder
-                    self.updateFavorite()
-                    self.saveToWidget()
-                    self.presenter?.successResponse()
-                } catch {
-                    // Tratamento de erro
-                    self.presenter?.getCharactersFail(errorMessage: AlertMessage.defaultMessage)
-                }
-            } else {
-                // Tratamento de erro
-            }
-        }
+    func getInitialCharacters() {
+        updateLayout(newLayout: initialAction())
+        self.presenter?.successResponse()
+        getCharacters(url: RequestEndpoint.characters(customQuery: nil).url)
     }
     
     func updateFavorite() {
@@ -71,32 +62,31 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
             }
         }
     }
-
-    func updateCharacters() {
-        guard let url = RequestEndpoint.characters(customQuery: getQuery()).url, !wating else {
+    
+    func getNewCharacters() {
+        guard !wating else {
             return
         }
         wating = true
-        Alamofire.request(url).response { response in
+        get(url: RequestEndpoint.characters(customQuery: getQuery()).url) { response in
             self.wating = false
-            if let data = response.data {
-                do {
-                    let decoder = try JSONDecoder().decode(Result.self, from: data)
-                    self.updateResult(newCharacters: decoder.data.allCharacters)
-                    self.presenter?.successResponse()
-                } catch let error {
-                    // Tratamento de erro
-                    self.presenter?.getCharactersFail(errorMessage: AlertMessage.defaultMessage)
-                }
-            } else {
-                
+            switch response {
+            case .success(let resultValue):
+                self.updateResult(newCharacters: resultValue.data.allCharacters)
+                self.presenter?.successResponse()
+            case .error(let error):
+                let customError = error as? ErrorResponse
+                self.presenter?.getCharactersFail(errorMessage: customError?.localizedDescription ?? ErrorMessage.defaultMessage)
             }
         }
     }
-    
+
+    func updateCharacters() {
+        getNewCharacters()
+    }
+
     func isNeedUpdateCharacters() {
         if let needUpdate = result?.existNextPagination, needUpdate {
-            presenter?.needUpdateCharacters()
             updateCharacters()
         }
     }
@@ -113,16 +103,46 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
         return ["offset": "\(result?.data.allCharacters.count ?? 0)"]
     }
     
-    func getCustomLayout() -> (title: String, customLayout: CustomLayout) {
+    func changeLayoutAction() -> (title: String, customLayout: CustomLayout) {
         var customLayout = CustomLayout.grid
         var buttonTitle = Buttons.list
-        if currentLayoutCollection == .grid {
+        if viewLayout.customLayout.customType == .grid {
             customLayout = CustomLayout.list
             buttonTitle = Buttons.grid
         }
-        currentLayoutCollection = customLayout
+        viewLayout.customLayout.customType = customLayout
         return(buttonTitle, customLayout)
     }
+    
+    func getLayout() -> CustomFlowLayout {
+        return viewLayout.customLayout
+    }
+    
+    func isVisibleChangeLayoutViewButton() -> Bool {
+        switch viewLayout.action {
+        case .showResult:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    func action() -> ActionCell {
+        viewLayout.action
+    }
+    
+    func initialAction() -> CustomLayoutCell {
+        return CustomLayoutCell(action: .loading, customLayout: CustomFlowLayout(custom: .list))
+    }
+    
+    func successAction() -> CustomLayoutCell {
+        return CustomLayoutCell(action: .showResult, customLayout: CustomFlowLayout(custom: .grid))
+    }
+    
+    func errorAction(message: String) -> CustomLayoutCell {
+        return CustomLayoutCell(action: .errorMessage(message: message), customLayout: CustomFlowLayout(custom: .list))
+    }
+    
     
     func updateImageInCharacters(id: Int, image: UIImage) {
         if let index = result?.data.allCharacters.firstIndex(where: { $0.id == id }) {
@@ -164,7 +184,7 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
     }
     
     func getTitleGridButton() -> String {
-        return currentLayoutCollection == .grid ? Buttons.list : Buttons.grid
+        return viewLayout.customLayout.customType == .grid ? Buttons.list : Buttons.grid
     }
     
     func saveToWidget() {
