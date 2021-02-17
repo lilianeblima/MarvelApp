@@ -29,10 +29,6 @@ class ListCharacterPresenter: ViewToPresenterListCharactersProtocol {
         interactor?.isNeedUpdateCharacters()
     }
     
-    func getNextCharacters() {
-        interactor?.updateCharacters()
-    }
-    
     func changeLayoutAction() -> (title: String, customLayout: CustomLayout)? {
         return interactor?.changeLayoutAction()
     }

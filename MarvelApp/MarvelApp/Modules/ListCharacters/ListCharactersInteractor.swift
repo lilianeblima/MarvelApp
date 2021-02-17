@@ -69,14 +69,10 @@ class ListCharactersInteractor: PresenterToInteractorListCharactersProtocol {
             }
         }
     }
-
-    func updateCharacters() {
-        getNewCharacters()
-    }
-
+    
     func isNeedUpdateCharacters() {
         if let needUpdate = result?.existNextPagination, needUpdate {
-            updateCharacters()
+            getNewCharacters()
         }
     }
     

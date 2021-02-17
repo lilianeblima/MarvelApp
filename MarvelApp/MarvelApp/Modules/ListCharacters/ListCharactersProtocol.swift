@@ -15,10 +15,10 @@ protocol ViewToPresenterListCharactersProtocol: class {
     func getInitialCharacters()
     func getNumberOfItemsInSection() -> Int
     func getSelectedCharacter(index: Int) -> Character?
-    func isNeedUpdateCharacters() //Trocar por loadMoreCharacters
+    func isNeedUpdateCharacters()
     func changeLayoutAction() -> (title: String, customLayout: CustomLayout)?
     func updateFavoriteCharacter(isFavorite: Bool, character: FavoriteCharacter?)
-    func getTitleGridButton() -> String //titleChangeLayoutViewButton
+    func getTitleGridButton() -> String 
     func pushCharacterDetail(character: Character)
     func updateImageInCharacters(id: Int, image: UIImage)
     func isVisibleChangeLayoutViewButton() -> Bool
@@ -32,7 +32,6 @@ protocol PresenterToInteractorListCharactersProtocol: class {
     
     func getInitialCharacters()
     func isNeedUpdateCharacters()
-    func updateCharacters()
     func changeLayoutAction() -> (title: String, customLayout: CustomLayout)
     func updateFavoriteCharacter(isFavorite: Bool, character: FavoriteCharacter?)
     func getTitleGridButton() -> String
